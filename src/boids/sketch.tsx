@@ -33,119 +33,128 @@ import type { Vector } from 'p5';
       };
       
       class Boid {
-          position: Vector
-          velocity: Vector
-          acceleration: Vector
-          tempVector: Vector
-          maxForce: number
-          maxSpeed: number
+        position: Vector
+        velocity: Vector
+        acceleration: Vector
+        tempVector: Vector
+        VisualRange: Vector
+        alignmentSum: Vector
+        cohesionSum: Vector
+        separationSum: Vector
+        maxForce: number
+        maxSpeed: number
 
-          constructor() {
-              this.position = p5.createVector(p5.random(-p5.width, p5.width),p5.random(-p5.height, p5.height),p5.random(-p5.width, p5.width))
-              this.velocity = p5.createVector(p5.random(-4, 4), p5.random(-4,4), p5.random(-4,4))
-              this.velocity.setMag(p5.random(3, 4))
-              this.acceleration = p5.createVector()
-              this.tempVector = p5.createVector()
-              this.maxForce = .12
-              this.maxSpeed = 4
-          }
+        constructor() {
+            this.alignmentSum = p5.createVector()
+            this.cohesionSum = p5.createVector()
+            this.separationSum = p5.createVector()
+            this.acceleration = p5.createVector()
+            this.tempVector = p5.createVector()
+            this.position = p5.createVector(p5.random(-p5.width, p5.width),p5.random(-p5.height, p5.height),p5.random(-p5.width, p5.width))
+            this.VisualRange = p5.createVector(.3 * p5.width, .3 * p5.height, .3 * p5.width)
+            this.velocity = p5.createVector(p5.random(-4, 4), p5.random(-4,4), p5.random(-4,4))
+            this.velocity.setMag(4)
+            this.maxForce = .12
+            this.maxSpeed = 4
+        }
 
-          edge() {
-              let VisualRange = p5.createVector(.3 * p5.width, .3 * p5.height, .3 * p5.width)
-              let TurningForce = 0.15
-              let SteeringVector = p5.createVector()
+        edge() {
+            let TurningForce = 0.15
+            let SteeringVector = p5.createVector()
 
-              if (this.position.x < -p5.width + VisualRange.x || this.position.x > p5.width - VisualRange.x) {
-                  let inverse = (this.position.x < -p5.width + VisualRange.x) ? 1 : -1
-                  SteeringVector.add(p5.createVector(TurningForce * inverse, 0, 0))
-              }
-
-              if (this.position.y < -p5.height + VisualRange.y || this.position.y > p5.height - VisualRange.y) {
-                  let inverse = (this.position.y < -p5.height + VisualRange.y) ? 1 : -1
-                  SteeringVector.add(p5.createVector(0, TurningForce * inverse, 0))
-              }
-
-              if (this.position.z < -p5.width + VisualRange.z || this.position.z > p5.width - VisualRange.z) {
-                  let inverse = (this.position.z < -p5.width + VisualRange.z) ? 1 : -1
-                  SteeringVector.add(p5.createVector(0, 0, TurningForce * inverse))
-              }
-
-              this.velocity.add(SteeringVector)
-          }
-
-          flock(octree : Octree) {
-              this.acceleration.mult(0)
-
-              let nearbyBoids = octree.findNeighbors(this, 50)
-              if (nearbyBoids.length === 0) { return }
-
-              let alignmentSum = p5.createVector()
-              let cohesionSum = p5.createVector()
-              let separationSum = p5.createVector()
-
-              let alignmentCount = 0
-              let cohesionCount = 0
-              let separationCount = 0
-
-              for (let other of nearbyBoids) {
-                  let dx = this.position.x - other.position.x
-                  let dy = this.position.y - other.position.y
-                  let dz = this.position.z - other.position.z
-                  let distSq = dx * dx + dy * dy + dz * dz
-
-                  if (distSq < 2500) {
-                      alignmentSum.add(other.velocity)
-                      alignmentCount++
-
-                      cohesionSum.add(other.position)
-                      cohesionCount++
-                  }
-
-                  if (distSq < 1250 && distSq > 0) {
-                      let dist = Math.sqrt(distSq)
-                      this.tempVector.set(dx, dy, dz)
-                      this.tempVector.div(dist)
-                      separationSum.add(this.tempVector)
-                      separationCount++
-                  }
-              }
-
-            if (alignmentCount > 0) {
-                alignmentSum.div(alignmentCount)
-                this.applySteeringForce(alignmentSum)
+            if (this.position.x < -p5.width + this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
+                let inverse = (this.position.x < -p5.width + this.VisualRange.x) ? 1 : -1
+                  SteeringVector.x += TurningForce * inverse
             }
 
-            if (cohesionCount > 0) {
-                cohesionSum.div(cohesionCount)
-                cohesionSum.sub(this.position)
-                this.applySteeringForce(cohesionSum)
+            if (this.position.y < -p5.height + this.VisualRange.y || this.position.y > p5.height - this.VisualRange.y) {
+                let inverse = (this.position.y < -p5.height + this.VisualRange.y) ? 1 : -1
+                SteeringVector.y += TurningForce * inverse
             }
 
-            if (separationCount > 0) {
-                separationSum.div(separationCount)
-                this.applySteeringForce(separationSum)
+            if (this.position.z < -p5.width + this.VisualRange.z || this.position.z > p5.width - this.VisualRange.z) {
+                let inverse = (this.position.z < -p5.width + this.VisualRange.z) ? 1 : -1
+                SteeringVector.z += TurningForce * inverse
             }
-          }
 
-          applySteeringForce(force: Vector) {
-            force.setMag(this.maxSpeed)
-            force.sub(this.velocity)
-            force.limit(this.maxForce)
-            this.acceleration.add(force)
-          }
-          
-          update() {
-            this.position.add(this.velocity)
-            this.velocity.add(this.acceleration)
-            this.velocity.limit(this.maxSpeed)
+            this.velocity.add(SteeringVector)
+            if (this.velocity.mag() > this.maxSpeed) {
+                    this.velocity.normalize()
+                    this.velocity.mult(this.maxSpeed)
+                }
+        }
+
+        flock(octree : Octree) {
             this.acceleration.mult(0)
-          }
 
-          show() {
-              p5.strokeWeight(5)
-              p5.stroke(255)
-              p5.point(this.position.x, this.position.y, this.position.z)
-          }
+            let nearbyBoids = octree.findNeighbors(this, 50)
+            if (nearbyBoids.length === 0) { return }
+            
+            this.alignmentSum.mult(0)
+            this.cohesionSum.mult(0)
+            this.separationSum.mult(0)
+
+            let alignmentCount = 0
+            let cohesionCount = 0
+            let separationCount = 0
+
+            for (let other of nearbyBoids) {
+                let dx = this.position.x - other.position.x
+                let dy = this.position.y - other.position.y
+                let dz = this.position.z - other.position.z
+                let distSq = dx * dx + dy * dy + dz * dz
+
+                if (distSq < 2500) {
+                    this.alignmentSum.add(other.velocity)
+                    alignmentCount++
+
+                    this.cohesionSum.add(other.position)
+                    cohesionCount++
+
+                    let dist = Math.sqrt(distSq)
+                    this.tempVector.set(dx, dy, dz)
+                    this.tempVector.div(dist)
+                    this.separationSum.add(this.tempVector)
+                    separationCount++
+                }
+            }
+
+        if (alignmentCount > 0) {
+            this.alignmentSum.div(alignmentCount)
+            this.applySteeringForce(this.alignmentSum)
+        }
+
+        if (cohesionCount > 0) {
+            this.cohesionSum.div(cohesionCount)
+            this.cohesionSum.sub(this.position)
+            this.applySteeringForce(this.cohesionSum)
+        }
+
+        if (separationCount > 0) {
+            this.separationSum.div(separationCount)
+            this.applySteeringForce(this.separationSum)
+        }
+        }
+
+        applySteeringForce(force: Vector) {
+        force.setMag(this.maxSpeed)
+        force.sub(this.velocity)
+        force.limit(this.maxForce)
+        this.acceleration.add(force)
+        }
+        
+        update() {
+        this.position.add(this.velocity)
+        this.velocity.add(this.acceleration)
+        this.velocity.limit(this.maxSpeed)
+        this.acceleration.mult(0)
+        }
+
+        show() {
+            p5.strokeWeight(5)
+            p5.stroke(255)
+            p5.point(this.position.x, this.position.y, this.position.z)
+        }
       }
 
       class Octree{
