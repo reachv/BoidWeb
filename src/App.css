@@ -1,0 +1,5 @@
+#root,
+html {
+    background-color: rgba(var(--bs-body-color-rgb));
+    color: aliceblue;
+}
