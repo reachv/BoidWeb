@@ -29,6 +29,7 @@ import type { Vector } from 'p5';
 
         p5.noFill()
         p5.stroke(255)
+        p5.strokeWeight(5)
         p5.box(2*p5.width, 2*p5.height, 2*p5.width)
       };
       
@@ -54,12 +55,12 @@ import type { Vector } from 'p5';
             this.VisualRange = p5.createVector(.3 * p5.width, .3 * p5.height, .3 * p5.width)
             this.velocity = p5.createVector(p5.random(-4, 4), p5.random(-4,4), p5.random(-4,4))
             this.velocity.setMag(4)
-            this.maxForce = .12
-            this.maxSpeed = 4
+            this.maxForce = .4
+            this.maxSpeed = 8
         }
 
         edge() {
-            let TurningForce = 0.15
+            let TurningForce = 0.5
             let SteeringVector = p5.createVector()
 
             if (this.position.x < -p5.width + this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
@@ -151,7 +152,7 @@ import type { Vector } from 'p5';
         }
 
         show() {
-            p5.strokeWeight(5)
+            p5.strokeWeight(1)
             p5.stroke(255)
             p5.point(this.position.x, this.position.y, this.position.z)
         }
