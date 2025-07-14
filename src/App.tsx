@@ -2,8 +2,8 @@ import { ReactP5Wrapper } from '@p5-wrapper/react'
 import './App.css'
 import { mySketch } from './boids/sketch'
 import { Col, Container, Image, ListGroup, ListGroupItem, Nav, Row } from 'react-bootstrap'
-import DiscordLogo from "./images/discord-logo.png"
-import LinkedInLogo from "./images/linkedin-logo.png"
+import DiscordLogo from "/discord-logo.png"
+import LinkedInLogo from "/linkedin-logo.png"
 
 function App() {
   return (
