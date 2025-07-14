@@ -1,5 +1,6 @@
 {
   "name": "boids",
+  "homepage": "https://reachv.github.io/BoidWeb/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,13 +8,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@p5-wrapper/react": "^4.4.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "bootstrap": "^5.3.7",
-    "gh-pages": "^6.3.0",
     "p5": "^2.0.3",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.10",
