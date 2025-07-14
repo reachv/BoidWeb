@@ -2,6 +2,9 @@ import { ReactP5Wrapper } from '@p5-wrapper/react'
 import './App.css'
 import { mySketch } from './boids/sketch'
 import { Col, Container, Image, ListGroup, ListGroupItem, Nav, Row } from 'react-bootstrap'
+import DiscordLogo from "./images/discord-logo.png"
+import LinkedInLogo from "./images/linkedin-logo.png"
+
 function App() {
   return (
     <>
@@ -17,7 +20,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://discord.com/users/208755414181871627">
-                    <Image src='/BoidWeb/src/images/discord-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src={DiscordLogo} style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
@@ -26,7 +29,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://www.linkedin.com/in/reach-vann-8b24691b0/">
-                    <Image src='/BoidWeb/src/images/linkedin-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src={LinkedInLogo} style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
