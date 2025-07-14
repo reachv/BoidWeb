@@ -17,7 +17,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://discord.com/users/208755414181871627">
-                    <Image src='/discord-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src='/BoidWeb/discord-logo.png' style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
@@ -26,7 +26,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://www.linkedin.com/in/reach-vann-8b24691b0/">
-                    <Image src='/linkedin-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src='/BoidWeb/linkedin-logo.png' style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
@@ -86,6 +86,7 @@ function App() {
                 <strong> Alignment </strong>, and  
                 <strong> Cohesion </strong>. 
                 These behaviors are applied through calculated steering forces based on nearby flockmates, which are efficiently queried using an Octree structure.
+              </p>
                 <ul>
                   <li>
                     <strong>Separation</strong>: Boids avoid crowding by calculating a repulsion vector from nearby flockmates that are within a close proximity. The vector is weighted by distance, ensuring stronger avoidance for closer neighbors.</li>
@@ -97,6 +98,7 @@ function App() {
                     <strong>Cohesion</strong>: Boids are drawn toward the center of mass of nearby flockmates. This is done by averaging the positions of neighbors and steering toward the resulting point.
                   </li>
                 </ul>
+              <p>
                 During each simulation frame, a boid queries nearby neighbors within a predetermined-unit radius using the Octree. 
                 It accumulates the <code>velocity</code> vectors for alignment, the <code>position</code> vectors for cohesion, and distance-weighted direction vectors for separation. 
                 Each of these summed vectors is then normalized and passed to the <code>applySteeringForce()</code> method, which limits the force magnitude and blends it into the boid's current acceleration.
@@ -146,8 +148,6 @@ function App() {
                 In this implementation, the method is constrained to a boid’s vision cone to ensure only relevant directions are sampled.
                 Boids use this spiral pattern to generate a set of evenly distributed sample directions represented initially in polar coordinates.
                 However, polar coordinates describe positions on a 2D plane, which is insufficient for modeling direction in 3D space.
-              </p>
-              <p>
                 To address this, the polar coordinates are translated into spherical coordinates. Instead of using the radius as the key parameter, 
                 the angle <em>φ</em> (phi) is used, where <em>0 ≤ φ ≤ π</em>, to define elevation on the sphere. 
                 This allows the boids to generate a uniform and unbiased set of directions within their 3D vision cone, 
