@@ -17,7 +17,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://discord.com/users/208755414181871627">
-                    <Image src='/BoidWeb/discord-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src='/BoidWeb/src/images/discord-logo.png' style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
@@ -26,7 +26,7 @@ function App() {
               <Nav className="justify-content-end">
                 <Nav.Item style={{ paddingRight: "10px" }}>
                   <a href="https://www.linkedin.com/in/reach-vann-8b24691b0/">
-                    <Image src='/BoidWeb/linkedin-logo.png' style={{ height: "32px", width: "32px" }}/>
+                    <Image src='/BoidWeb/src/images/linkedin-logo.png' style={{ height: "32px", width: "32px" }}/>
                   </a>
                 </Nav.Item>
               </Nav>
