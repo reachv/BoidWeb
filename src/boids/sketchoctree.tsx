@@ -1,9 +1,9 @@
 import {type P5CanvasInstance}  from '@p5-wrapper/react';
 import type { Vector } from 'p5';
 
-export function mySketch(p5: P5CanvasInstance) {
-        let n = 2000
-        let draw = false
+export function mySketchOctree(p5: P5CanvasInstance) {
+        let n = 500
+        let draw = true
         let flock: Boid[] = []
         let octree: Octree
         let frameCount : number = 0

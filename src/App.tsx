@@ -1,9 +1,16 @@
 import { ReactP5Wrapper } from '@p5-wrapper/react'
 import './App.css'
 import { mySketch } from './boids/sketch'
-import { Col, Container, Image, ListGroup, ListGroupItem, Nav, Row } from 'react-bootstrap'
+import { Card, Col, Container, Image, ListGroup, ListGroupItem, Nav, Row } from 'react-bootstrap'
 import DiscordLogo from "/discord-logo.png"
 import LinkedInLogo from "/linkedin-logo.png"
+import Separation from "/Rule_separation.png"
+import Alignment from "/Rule_alignment.png"
+import Cohesion from "/Rule_cohesion.png"
+import PolarCord from "/polar_coordinates.png"
+import SphericalCords from "/spherical_coords.png"
+import { mySketchOctree } from './boids/sketchoctree'
+
 
 function App() {
   return (
@@ -41,7 +48,7 @@ function App() {
         <Container 
           className='object-fit-contain border rounded' 
           style={{textAlign:"center", padding:"1em", boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px"}}>
-          <ReactP5Wrapper sketch={mySketch} />
+          <ReactP5Wrapper sketch={mySketch}/>
           <Row className='justify-content-md-center' style={{paddingTop:"1em"}}>
             <Col md = 'auto'>
               <ListGroup horizontal>
@@ -92,7 +99,9 @@ function App() {
               </p>
                 <ul>
                   <li>
-                    <strong>Separation</strong>: Boids avoid crowding by calculating a repulsion vector from nearby flockmates that are within a close proximity. The vector is weighted by distance, ensuring stronger avoidance for closer neighbors.</li>
+                    <strong>Separation</strong>: Boids avoid crowding by calculating a repulsion vector from nearby flockmates that are within a close proximity. 
+                    The vector is weighted by distance, ensuring stronger avoidance for closer neighbors.
+                  </li>
                   <li>
                     <strong>Alignment</strong>: Boids steer to match the average velocity of nearby boids. 
                     This is achieved by averaging the velocity vectors of all neighbors within a specified range and applying a steering force toward that average direction.
@@ -101,6 +110,32 @@ function App() {
                     <strong>Cohesion</strong>: Boids are drawn toward the center of mass of nearby flockmates. This is done by averaging the positions of neighbors and steering toward the resulting point.
                   </li>
                 </ul>
+                <Row className='justify-content-center' style={{padding:"1em"}}>
+                  <Col sm="auto">
+                    <Card className='border' bg='dark' style={{width:"10rem", height:"10rem"}} text='white'>
+                      <Card.Header style={{textAlign:"center"}}>
+                        Separation
+                      </Card.Header>
+                      <Card.Img variant='bottom' src={Separation}/>
+                    </Card>
+                  </Col>
+                  <Col sm="auto">
+                    <Card className='border' bg='dark' style={{width:"10rem", height:"10rem"}} text='white'>
+                      <Card.Header style={{textAlign:"center"}}>
+                        Alignment
+                      </Card.Header>
+                      <Card.Img variant='bottom' src={Alignment}/>
+                    </Card>
+                  </Col>
+                  <Col sm="auto">
+                    <Card className='border' bg='dark' style={{width:"10rem", height:"10rem"}} text='white'>
+                      <Card.Header style={{textAlign:"center"}}>
+                        Cohesion
+                      </Card.Header>
+                      <Card.Img variant='bottom' src={Cohesion}/>
+                    </Card>
+                  </Col>
+                </Row>
               <p>
                 During each simulation frame, a boid queries nearby neighbors within a predetermined-unit radius using the Octree. 
                 It accumulates the <code>velocity</code> vectors for alignment, the <code>position</code> vectors for cohesion, and distance-weighted direction vectors for separation. 
@@ -134,6 +169,22 @@ function App() {
                 Thanks to this Octree implementation, the simulation avoids redundant distance checks between all boids. Instead, each boid only needs to check against a small, localized set of neighbors returned by the Octree. 
                 This results in a significant boost in performance, especially when handling thousands of agents in real time, making the flocking behavior both scalable and responsive. 
               </p>
+              <Row className='justify-content-center' style={{textAlign:"center"}}>
+                <ReactP5Wrapper sketch = {mySketchOctree}/>
+                <Col md = 'auto'>
+                  <ListGroup horizontal>
+                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                      Scroll to zoom
+                    </ListGroupItem>
+                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                      Hold left click to rotate
+                    </ListGroupItem>
+                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                      Hold right click to shift position
+                    </ListGroupItem>
+                  </ListGroup>
+                </Col>
+              </Row>
               <h2>
                 Boids' Edge Behavior
               </h2>
@@ -151,6 +202,14 @@ function App() {
                 In this implementation, the method is constrained to a boid’s vision cone to ensure only relevant directions are sampled.
                 Boids use this spiral pattern to generate a set of evenly distributed sample directions represented initially in polar coordinates.
                 However, polar coordinates describe positions on a 2D plane, which is insufficient for modeling direction in 3D space.
+              </p>
+              <Container fluid className='justify-content-center align-items-center' style={{display:"flex", padding:"1em"}}>
+                <Card className='border' bg='dark' text='white'>
+                  <Card.Header>Polar Coordinates Representation</Card.Header>
+                  <Card.Img src={PolarCord} />
+                </Card>
+              </Container>
+              <p>
                 To address this, the polar coordinates are translated into spherical coordinates. Instead of using the radius as the key parameter, 
                 the angle <em>φ</em> (phi) is used, where <em>0 ≤ φ ≤ π</em>, to define elevation on the sphere. 
                 This allows the boids to generate a uniform and unbiased set of directions within their 3D vision cone, 
@@ -162,6 +221,12 @@ function App() {
                 If the ray remains within bounds and meets predefined parameters, the corresponding direction vector is stored temporarily. 
                 Among all valid rays, the one representing the longest clear path is selected, allowing the boid to make informed decisions when steering near edges or potential collisions.
               </p>
+              <Container fluid className='justify-content-center align-items-center' style={{display:"flex", padding:"1em"}}>
+                <Card className='border' bg='dark' text='white'>
+                  <Card.Header>Spherical Coordinates Representation</Card.Header>
+                  <Card.Img src={SphericalCords} style={{width:"400px", height:"400px"}}/>
+                </Card>
+              </Container>
               <h4>
                 Cons: Fibonacci's Spiral
               </h4>
@@ -216,6 +281,7 @@ function App() {
           </Row>
         </Container>
       </div>
+
     </>
   )
 }
