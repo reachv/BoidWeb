@@ -27,7 +27,7 @@ function App() {
               <p style={{fontSize:"25px"}}>Reach Vann</p>
               <p style={{paddingTop:"10px"}}>Published</p>
               <p style={{fontSize:"25px"}}>2025.07.21</p>
-              <p>Contact Me</p>
+              <p>Contact me on</p>
               <Row>
                 <Col md={'auto'} style={{paddingTop:"0.5em"}}>
                   <Nav className="justify-content-end">
