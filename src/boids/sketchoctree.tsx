@@ -2,15 +2,13 @@ import {type P5CanvasInstance}  from '@p5-wrapper/react';
 import type { Vector } from 'p5';
 
 export function mySketchOctree(p5: P5CanvasInstance) {
-        let n = 500
-        let draw = true
         let flock: Boid[] = []
         let octree: Octree
-        let frameCount : number = 0
         p5.setup = () => {
             let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
-            p5.createCanvas(750, 750, p5.WEBGL);
-            for(let i: number = 0; i < n; i++){
+            canvasSize *= .75
+            p5.createCanvas(canvasSize, canvasSize, p5.WEBGL);
+            for(let i: number = 0; i < 500; i++){
                 flock.push(new Boid())
             }
             octree = new Octree(p5.createVector(0,0,0), canvasSize)
@@ -21,9 +19,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
             p5.orbitControl()
             
             octree.rebuild(flock)
-            if(draw){
-                octree.draw()
-            }
+            octree.draw()
             for(let boid of flock){
                 boid.flock(octree)
                 boid.update()
@@ -34,9 +30,14 @@ export function mySketchOctree(p5: P5CanvasInstance) {
             p5.noFill()
             p5.stroke(255)
             p5.strokeWeight(5)
-            p5.box(2*p5.width, 2*p5.height, 2*p5.width)
-            frameCount++
         };
+
+        p5.windowResized = () => {
+            let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
+            canvasSize *= .75
+            p5.resizeCanvas(canvasSize, canvasSize)
+            octree = new Octree(p5.createVector(0,0,0), canvasSize)
+        }
     
         class Boid {
             position: Vector
@@ -110,7 +111,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
                     let dz = this.position.z - other.position.z
                     let distSq = dx * dx + dy * dy + dz * dz
 
-                    if (distSq < 5000) {
+                    if (distSq < 10000) {
                         this.alignmentSum.add(other.velocity)
                         alignmentCount++
 
@@ -207,7 +208,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
 
             draw() {
                 p5.push();
-                p5.stroke(100, 100, 255, 100); // Light blue, semi-transparent
+                p5.stroke(100, 100, 255, 100); 
                 p5.strokeWeight(1);
                 p5.noFill();
                 this.root.draw();
@@ -372,7 +373,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
                     p5.push();
 
                     // Color code by depth
-                    let alpha = 60 + (this.depth * 30); // Deeper levels are more opaque
+                    let alpha = 60 + (this.depth * 30); 
                     switch (this.depth) {
                         case 0: p5.stroke(255, 0, 0, alpha); break;     // Red for root
                         case 1: p5.stroke(0, 255, 0, alpha); break;     // Green for level 1
@@ -381,7 +382,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
                         default: p5.stroke(255, 0, 255, alpha); break;  // Magenta for deeper
                     }
 
-                    p5.strokeWeight(1 + this.depth * 0.5); // Thicker lines for deeper levels
+                    p5.strokeWeight(1 + this.depth * 0.5);
                     this.boundary.draw();
                     p5.pop();
                 }
