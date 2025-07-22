@@ -12,6 +12,7 @@ import PolarCord from "/polar_coordinates.png"
 import SphericalCords from "/spherical_coords.png"
 import OctreeFreezeFrame from "/octreefreezeframe.png"
 import { mySketchOctree } from './boids/sketchoctree'
+import  { TwoDBoid } from './boids/2dboid'
 
 
 
@@ -22,7 +23,8 @@ function App() {
       <Container fluid>
         <Row style={{paddingLeft:"1em"}}>
           <Col className='d-none d-md-block' xs="auto" style={{paddingRight:"10em", textAlign:"start"}}>
-            <Container className='position-fixed' style={{top:"40vh"}}>
+            <Container className='position-fixed' style={{top:"10vh"}}>
+              <h2>Boids in 3D</h2>
               <p>Written by</p>
               <p style={{fontSize:"25px"}}>Reach Vann</p>
               <p style={{paddingTop:"10px"}}>Published</p>
@@ -64,9 +66,6 @@ function App() {
               <Container fluid style={{textAlign:"center"}}>
                 <Row>
                   <Col>
-                    <h1>
-                      Boids in 3D
-                    </h1>
                     <ReactP5Wrapper sketch={mySketch}/>
                   </Col>
                 </Row>
@@ -272,6 +271,11 @@ function App() {
                       Due to the intentionally low steering force, boids were allocated approximately 30% of the total available space as a buffer zone to complete the avoidance maneuver before reaching the boundary. 
                       Thanks to its simplicity, the linear velocity method was also highly efficient in terms of performance and memory usage, as it required minimal computational resources.
                     </p>
+                    <Container fluid className='justify-content-center'>
+                      <Row style={{textAlign:"center"}}>
+                        <ReactP5Wrapper sketch={TwoDBoid} />
+                      </Row>
+                    </Container>
                     <h4>
                       Cons: Linear Velocity
                     </h4>

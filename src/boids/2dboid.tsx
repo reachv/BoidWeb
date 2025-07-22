@@ -1,0 +1,134 @@
+import {type P5CanvasInstance}  from '@p5-wrapper/react';
+import type { Vector } from 'p5';
+
+
+export function TwoDBoid(p5: P5CanvasInstance){
+    let flock : Boid[] = []
+    p5.setup = () => {
+        let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
+        canvasSize *= .5
+        p5.createCanvas(canvasSize, canvasSize)
+        for(let i: number = 0; i < 100; i++){
+            flock.push(new Boid())
+        }
+    }
+
+    p5.draw = () => {
+        p5.background(0)
+        for(let boid of flock){
+            boid.edge()
+            boid.flock(flock)
+            boid.update()
+            boid.show()
+        }
+    }
+
+    p5.windowResized = () => {
+        let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
+        canvasSize *= .5
+        p5.resizeCanvas(canvasSize, canvasSize)
+    }
+
+    class Boid{
+        position: Vector
+        velocity: Vector
+        acceleration: Vector
+        VisualRange: Vector
+        maxSpeed: number
+
+        constructor(){
+            this.position = p5.createVector(p5.random(p5.width), p5.random(p5.height))
+            this.velocity = p5.createVector(p5.random(-4,4), p5.random(-4,4))
+            this.VisualRange = p5.createVector(.2 * p5.width, .2 * p5.height)
+            this.velocity.setMag(p5.random(2, 4))
+            this.acceleration = p5.createVector()
+            this.maxSpeed = 4
+        }
+
+        flock(boids: Boid[]){
+            let AlignmentAverage: Vector = p5.createVector()
+            let AlignmentCount: number = 0
+
+            let CohesionAverage: Vector = p5.createVector()
+            let CohesionCount: number = 0
+
+            let SeperationAverage: Vector = p5.createVector()
+            let SeperationCount: number = 0
+
+            for(let boid of boids){
+                if(boid != this){
+                    let distance: number = p5.dist(this.position.x, this.position.y, boid.position.x, boid.position.y)
+                    distance *= distance
+                    if(distance < 10000){
+                        
+                        AlignmentAverage.add(boid.velocity)
+                        CohesionAverage.add(boid.position)
+
+                        AlignmentCount += 1
+                        CohesionCount += 1
+
+                        if(distance < 9000){
+                            let diff = p5.createVector(this.position.x - boid.position.x, this.position.y - boid.position.y)
+                            diff.div(distance)
+                            SeperationAverage.add(diff)
+                            SeperationCount += 1
+                        }
+                    }
+                }
+            }
+            if(AlignmentCount){
+                AlignmentAverage.div(AlignmentCount)
+                AlignmentAverage.mult(0.05)
+                this.velocity.add(AlignmentAverage)
+            }
+            if(CohesionCount){
+                CohesionAverage.div(CohesionCount)
+                CohesionAverage.sub(this.position)
+                CohesionAverage.mult(0.005)
+                this.velocity.add(CohesionAverage)
+            }
+            if(SeperationCount){
+                SeperationAverage.div(SeperationCount)
+                SeperationAverage.mult(1.5)
+                this.velocity.add(SeperationAverage)
+            }
+        }
+
+        edge(){
+                let TurningForce = .25
+                let SteeringVector = p5.createVector()
+
+                if (this.position.x < this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
+                    if(this.position.x < this.VisualRange.x){SteeringVector.x += TurningForce} 
+                    else{SteeringVector.x -= TurningForce}
+                }
+
+                if (this.position.y < this.VisualRange.y || this.position.y > p5.height - this.VisualRange.y) {
+                    if(this.position.y < this.VisualRange.y){SteeringVector.y += TurningForce} 
+                    else{SteeringVector.y -= TurningForce}
+                }
+
+                this.velocity.add(SteeringVector)
+                if (this.velocity.mag() > this.maxSpeed) {
+                        this.velocity.normalize()
+                        this.velocity.mult(this.maxSpeed)
+            }
+        }
+
+        update(){
+            this.position.add(this.velocity)
+            this.velocity.add(this.acceleration)
+            this.velocity.limit(this.maxSpeed)
+            this.acceleration.mult(0)
+        }
+        show(){
+            p5.strokeWeight(1)
+            p5.stroke(255)
+            p5.point(this.position.x, this.position.y)
+        }
+    }
+
+}
+
+
+
