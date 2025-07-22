@@ -6,7 +6,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
     let flock : Boid[] = []
     p5.setup = () => {
         let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
-        canvasSize *= .5
+        canvasSize *= .6
         p5.createCanvas(canvasSize, canvasSize)
         for(let i: number = 0; i < 100; i++){
             flock.push(new Boid())
@@ -25,7 +25,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
 
     p5.windowResized = () => {
         let canvasSize = p5.min(p5.windowHeight, p5.windowWidth)
-        canvasSize *= .5
+        canvasSize *= .6
         p5.resizeCanvas(canvasSize, canvasSize)
     }
 
@@ -59,7 +59,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
                 if(boid != this){
                     let distance: number = p5.dist(this.position.x, this.position.y, boid.position.x, boid.position.y)
                     distance *= distance
-                    if(distance < 10000){
+                    if(distance < 400){
                         
                         AlignmentAverage.add(boid.velocity)
                         CohesionAverage.add(boid.position)
@@ -67,9 +67,8 @@ export function TwoDBoid(p5: P5CanvasInstance){
                         AlignmentCount += 1
                         CohesionCount += 1
 
-                        if(distance < 9000){
+                        if(distance < 100){
                             let diff = p5.createVector(this.position.x - boid.position.x, this.position.y - boid.position.y)
-                            diff.div(distance)
                             SeperationAverage.add(diff)
                             SeperationCount += 1
                         }
@@ -84,18 +83,18 @@ export function TwoDBoid(p5: P5CanvasInstance){
             if(CohesionCount){
                 CohesionAverage.div(CohesionCount)
                 CohesionAverage.sub(this.position)
-                CohesionAverage.mult(0.005)
+                CohesionAverage.mult(0.0005)
                 this.velocity.add(CohesionAverage)
             }
             if(SeperationCount){
                 SeperationAverage.div(SeperationCount)
-                SeperationAverage.mult(1.5)
+                SeperationAverage.mult(0.05)
                 this.velocity.add(SeperationAverage)
             }
         }
 
         edge(){
-                let TurningForce = .25
+                let TurningForce = .35
                 let SteeringVector = p5.createVector()
 
                 if (this.position.x < this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {

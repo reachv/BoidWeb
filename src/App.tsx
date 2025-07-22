@@ -269,7 +269,7 @@ function App() {
                       Upon detection of a boundary within range, the simulation determined which axis-aligned boundary (x, y, or z) was being approached. A corresponding steering vector was then applied in the opposite direction of the detected boundary. 
                       To maintain velocity continuity and prevent unnatural acceleration or deceleration, the resulting velocity vector was normalized to preserve the boid’s original speed. 
                       Due to the intentionally low steering force, boids were allocated approximately 30% of the total available space as a buffer zone to complete the avoidance maneuver before reaching the boundary. 
-                      Thanks to its simplicity, the linear velocity method was also highly efficient in terms of performance and memory usage, as it required minimal computational resources.
+                      Thanks to its simplicity, the linear velocity method was also highly efficient in terms of performance and memory usage, as it required minimal computational resources. 
                     </p>
                     <Container fluid className='justify-content-center'>
                       <Row style={{textAlign:"center"}}>
