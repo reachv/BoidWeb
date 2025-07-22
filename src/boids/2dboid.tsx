@@ -11,6 +11,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
         for(let i: number = 0; i < 100; i++){
             flock.push(new Boid())
         }
+        
     }
 
     p5.draw = () => {
@@ -35,7 +36,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
         acceleration: Vector
         VisualRange: Vector
         maxSpeed: number
-
+        maxForce: number
         constructor(){
             this.position = p5.createVector(p5.random(p5.width), p5.random(p5.height))
             this.velocity = p5.createVector(p5.random(-4,4), p5.random(-4,4))
@@ -43,6 +44,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
             this.velocity.setMag(p5.random(2, 4))
             this.acceleration = p5.createVector()
             this.maxSpeed = 4
+            this.maxForce = 0.2
         }
 
         flock(boids: Boid[]){
@@ -52,49 +54,58 @@ export function TwoDBoid(p5: P5CanvasInstance){
             let CohesionAverage: Vector = p5.createVector()
             let CohesionCount: number = 0
 
-            let SeperationAverage: Vector = p5.createVector()
-            let SeperationCount: number = 0
+            let SeparationAverage: Vector = p5.createVector()
+            let SeparationCount: number = 0
 
             for(let boid of boids){
                 if(boid != this){
                     let distance: number = p5.dist(this.position.x, this.position.y, boid.position.x, boid.position.y)
                     distance *= distance
-                    if(distance < 400){
-                        
-                        AlignmentAverage.add(boid.velocity)
-                        CohesionAverage.add(boid.position)
+                    let dx = this.position.x - boid.position.x
+                    let dy = this.position.y - boid.position.y
+                    let dz = this.position.z - boid.position.z
+                    let distSq = dx * dx + dy * dy + dz * dz
 
-                        AlignmentCount += 1
-                        CohesionCount += 1
 
-                        if(distance < 100){
-                            let diff = p5.createVector(this.position.x - boid.position.x, this.position.y - boid.position.y)
-                            SeperationAverage.add(diff)
-                            SeperationCount += 1
-                        }
-                    }
+                    AlignmentAverage.add(boid.velocity)
+                    AlignmentCount++
+
+                    CohesionAverage.add(boid.position)
+                    CohesionCount++
+
+                    let dist = Math.sqrt(distSq)
+                    let tempVector = p5.createVector(dx, dy, dz)
+                    tempVector.div(dist)
+                    SeparationAverage.add(tempVector)
+                    SeparationCount++
                 }
+                
             }
-            if(AlignmentCount){
+            if (AlignmentCount > 0) {
                 AlignmentAverage.div(AlignmentCount)
-                AlignmentAverage.mult(0.05)
-                this.velocity.add(AlignmentAverage)
+                this.applySteeringForce(AlignmentAverage)
             }
-            if(CohesionCount){
+            if (CohesionCount > 0) {
                 CohesionAverage.div(CohesionCount)
                 CohesionAverage.sub(this.position)
-                CohesionAverage.mult(0.0005)
-                this.velocity.add(CohesionAverage)
+                this.applySteeringForce(CohesionAverage)
             }
-            if(SeperationCount){
-                SeperationAverage.div(SeperationCount)
-                SeperationAverage.mult(0.05)
-                this.velocity.add(SeperationAverage)
+            if (SeparationCount > 0) {
+                SeparationAverage.div(SeparationCount)
+                this.applySteeringForce(SeparationAverage, 1.2)
             }
         }
 
+        applySteeringForce(force: Vector, ForceMult: number = 1.0) {
+            force.setMag(this.maxSpeed)
+            force.sub(this.velocity)
+            force.limit(this.maxForce)
+            force.mult(ForceMult)
+            this.acceleration.add(force)
+        }
+
         edge(){
-                let TurningForce = .35
+                let TurningForce = .25
                 let SteeringVector = p5.createVector()
 
                 if (this.position.x < this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
