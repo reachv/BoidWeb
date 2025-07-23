@@ -15,7 +15,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
     }
 
     p5.draw = () => {
-        p5.background(0)
+        p5.background(68, 18, 130)
         for(let boid of flock){
             boid.edge()
             boid.flock(flock)
@@ -40,11 +40,11 @@ export function TwoDBoid(p5: P5CanvasInstance){
         constructor(){
             this.position = p5.createVector(p5.random(p5.width), p5.random(p5.height))
             this.velocity = p5.createVector(p5.random(-4,4), p5.random(-4,4))
-            this.VisualRange = p5.createVector(.2 * p5.width, .2 * p5.height)
+            this.VisualRange = p5.createVector(.1 * p5.width, .1 * p5.height)
             this.velocity.setMag(p5.random(2, 4))
             this.acceleration = p5.createVector()
             this.maxSpeed = 4
-            this.maxForce = 0.2
+            this.maxForce = 0.02
         }
 
         flock(boids: Boid[]){
@@ -65,19 +65,21 @@ export function TwoDBoid(p5: P5CanvasInstance){
                     let dy = this.position.y - boid.position.y
                     let dz = this.position.z - boid.position.z
                     let distSq = dx * dx + dy * dy + dz * dz
+                    
+                    if(distSq < 10000){
+                        AlignmentAverage.add(boid.velocity)
+                        AlignmentCount++
 
-
-                    AlignmentAverage.add(boid.velocity)
-                    AlignmentCount++
-
-                    CohesionAverage.add(boid.position)
-                    CohesionCount++
-
-                    let dist = Math.sqrt(distSq)
-                    let tempVector = p5.createVector(dx, dy, dz)
-                    tempVector.div(dist)
-                    SeparationAverage.add(tempVector)
-                    SeparationCount++
+                        CohesionAverage.add(boid.position)
+                        CohesionCount++
+                        if(distSq < 4000){
+                            let dist = Math.sqrt(distSq)
+                            let tempVector = p5.createVector(dx, dy, dz)
+                            tempVector.div(dist)
+                            SeparationAverage.add(tempVector)
+                            SeparationCount++
+                        }
+                    }
                 }
                 
             }
@@ -105,7 +107,7 @@ export function TwoDBoid(p5: P5CanvasInstance){
         }
 
         edge(){
-                let TurningForce = .25
+                let TurningForce = .15
                 let SteeringVector = p5.createVector()
 
                 if (this.position.x < this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
@@ -132,13 +134,10 @@ export function TwoDBoid(p5: P5CanvasInstance){
             this.acceleration.mult(0)
         }
         show(){
-            p5.strokeWeight(1)
+            p5.strokeWeight(2)
             p5.stroke(255)
             p5.point(this.position.x, this.position.y)
         }
     }
-
 }
-
-
 

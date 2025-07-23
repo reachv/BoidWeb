@@ -15,7 +15,7 @@ export function mySketch(p5: P5CanvasInstance) {
         };
 
         p5.draw = () => {
-            p5.background(0);
+            p5.background(68, 18, 130);
             p5.orbitControl()
             
             octree.rebuild(flock)
@@ -59,15 +59,15 @@ export function mySketch(p5: P5CanvasInstance) {
                 this.acceleration = p5.createVector()
                 this.tempVector = p5.createVector()
                 this.position = p5.createVector(p5.random(-p5.width, p5.width),p5.random(-p5.height, p5.height),p5.random(-p5.width, p5.width))
-                this.VisualRange = p5.createVector(.3 * p5.width, .3 * p5.height, .3 * p5.width)
+                this.VisualRange = p5.createVector(.2 * p5.width, .2 * p5.height, .2 * p5.width)
                 this.velocity = p5.createVector(p5.random(-4, 4), p5.random(-4,4), p5.random(-4,4))
                 this.velocity.setMag(4)
-                this.maxForce = 0.4
+                this.maxForce = 0.02
                 this.maxSpeed = 8
             }
 
             edge() {
-                let TurningForce = 0.65
+                let TurningForce = 0.15
                 let SteeringVector = p5.createVector()
 
                 if (this.position.x < -p5.width + this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
@@ -95,7 +95,7 @@ export function mySketch(p5: P5CanvasInstance) {
             flock(octree : Octree) {
                 this.acceleration.mult(0)
 
-                let nearbyBoids = octree.findNeighbors(this, 50)
+                let nearbyBoids = octree.findNeighbors(this, 150)
                 if (nearbyBoids.length === 0) { return }
                 
                 this.alignmentSum.mult(0)
@@ -112,14 +112,14 @@ export function mySketch(p5: P5CanvasInstance) {
                     let dz = this.position.z - other.position.z
                     let distSq = dx * dx + dy * dy + dz * dz
 
-                    if (distSq < 5000) {
+                    if (distSq < 15000) {
                         this.alignmentSum.add(other.velocity)
                         alignmentCount++
 
                         this.cohesionSum.add(other.position)
                         cohesionCount++
 
-                        if(distSq < 1500){
+                        if(distSq < 10000){
                             let dist = Math.sqrt(distSq)
                             this.tempVector.set(dx, dy, dz)
                             this.tempVector.div(dist)
@@ -131,7 +131,7 @@ export function mySketch(p5: P5CanvasInstance) {
 
                 if (alignmentCount > 0) {
                     this.alignmentSum.div(alignmentCount)
-                    this.applySteeringForce(this.alignmentSum)
+                    this.applySteeringForce(this.alignmentSum, 1.2)
                 }
 
                 if (cohesionCount > 0) {
@@ -142,7 +142,7 @@ export function mySketch(p5: P5CanvasInstance) {
 
                 if (separationCount > 0) {
                     this.separationSum.div(separationCount)
-                    this.applySteeringForce(this.separationSum, 1.4)
+                    this.applySteeringForce(this.separationSum, 1.2)
                 }
             }
 

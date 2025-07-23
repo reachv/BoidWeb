@@ -50,68 +50,100 @@ function App() {
           }
       }
     `
-  const OctreeCode = `
-  class Octree{
-      boundary: BoundingBox
-      root: OctreeNode
-      constructor(center: Vector, size: number, maxCapacity = 20) {
-          this.boundary = new BoundingBox(center, size)
-          this.root = new OctreeNode(this.boundary, maxCapacity)
-      }
-      insert(boid : Boid) {
-          return this.root.insert(boid)
-      }
-      queryRadius(center: Vector, radius: number) {
-          return this.root.query(center, radius)
-      }
-      clear() {
-          this.root.clear()
-      }
-      rebuild(boids: Boid[]) {
-          this.clear();
-          for (let i = 0; i < boids.length; i++) {
-              this.insert(boids[i])
+  const OctreeCode = 
+` class Octree{
+    boundary: BoundingBox
+    root: OctreeNode
+    constructor(center: Vector, size: number, maxCapacity = 20) {
+        this.boundary = new BoundingBox(center, size)
+        this.root = new OctreeNode(this.boundary, maxCapacity)
+    }
+    insert(boid : Boid) {
+        return this.root.insert(boid)
+    }
+    queryRadius(center: Vector, radius: number) {
+        return this.root.query(center, radius)
+    }
+    clear() {
+        this.root.clear()
+    }
+    rebuild(boids: Boid[]) {
+        this.clear();
+        for (let i = 0; i < boids.length; i++) {
+            this.insert(boids[i])
+        }
+    }
+    findNeighbors(boid : Boid, radius: number) {
+        let neighbors = this.queryRadius(boid.position, radius);
+        const idx = neighbors.indexOf(boid)
+        if (idx !== -1) {
+            neighbors[idx] = neighbors[neighbors.length - 1]
+            neighbors.pop()
+        }
+        return neighbors;
+    }
+    draw() {
+        p5.push();
+        p5.stroke(100, 100, 255, 100); 
+        p5.strokeWeight(1);
+        p5.noFill();
+        this.root.draw();
+        p5.pop();
+    }
+}`
+  const EdgeCode = 
+`edge(){
+      let TurningForce = .25
+      let SteeringVector = p5.createVector()
+
+      if (this.position.x < this.VisualRange.x || 
+        this.position.x > p5.width - this.VisualRange.x) {
+          if(this.position.x < this.VisualRange.x){
+          SteeringVector.x += TurningForce
+          } 
+          else{
+            SteeringVector.x -= TurningForce
           }
       }
-      findNeighbors(boid : Boid, radius: number) {
-          let neighbors = this.queryRadius(boid.position, radius);
-          const idx = neighbors.indexOf(boid)
-          if (idx !== -1) {
-              neighbors[idx] = neighbors[neighbors.length - 1]
-              neighbors.pop()
+      if (this.position.y < this.VisualRange.y || 
+        this.position.y > p5.height - this.VisualRange.y) 
+        {
+          if(this.position.y < this.VisualRange.y){
+          SteeringVector.y += TurningForce
+          } 
+          else{
+            SteeringVector.y -= TurningForce
           }
-          return neighbors;
       }
-      draw() {
-          p5.push();
-          p5.stroke(100, 100, 255, 100); 
-          p5.strokeWeight(1);
-          p5.noFill();
-          this.root.draw();
-          p5.pop();
-      }
-  }`
+      this.velocity.add(SteeringVector)
+      if (this.velocity.mag() > this.maxSpeed) {
+              this.velocity.normalize()
+              this.velocity.mult(this.maxSpeed)
+  }
+}`
   return (
     <div>
-      <Container className='justify-content-center' style={{paddingTop:"1em"}}>
+      <Container className='justify-content-center' style={{paddingTop:"1em", paddingBottom:"5em"}}>
+        
+        {/*Backgroup*/}
         <Row className='align-items-center'>
-          <Col>
+          <Col className='border' style={{padding:"1em"}}>
             <ReactP5Wrapper sketch={mySketch} />
              <Row className='justify-content-md-center'>
-                <Col md = 'auto'>
-                  <ListGroup horizontal>
-                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
-                      Scroll to zoom
-                    </ListGroupItem>
-                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
-                      Hold left click to rotate
-                    </ListGroupItem>
-                    <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
-                      Hold right click to shift position
-                    </ListGroupItem>
-                  </ListGroup>
-                </Col>
-              </Row>
+                  <Col md = 'auto'>
+                    <ListGroup horizontal>
+                      <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                        Scroll to zoom
+                      </ListGroupItem>
+                      <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                        Hold left click to rotate
+                      </ListGroupItem>
+                      <ListGroupItem style={{backgroundColor:"rgba(var(--bs-body-color-rgb))", color: "aliceblue"}}>
+                        Hold right click to shift position
+                      </ListGroupItem>
+                    </ListGroup>
+                  </Col>
+                </Row>
           </Col>
 
           <Col>
@@ -135,7 +167,9 @@ function App() {
             </Typography>
           </Col>
         </Row>
-        <Row className='align-items-center' style={{paddingTop:"1em", paddingBottom:"1em"}}>
+
+        {/*Flocking*/}
+        <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"5em"}}>
           <Col>
             <Typography variant='h4'>
               Boids' Behavior
@@ -184,9 +218,13 @@ function App() {
             </Col>
           </Row>
         </Paper>
+
+        {/*Octree*/}
         <Row className='align-items-center' style={{paddingTop:"2em", paddingBottom:"2em"}}>
           <Col sm={"auto"}>
-            <Image src={OctreeFreezeFrame}/>
+           <Paper elevation={16} style={{backgroundColor:"rgb(43,43,43)", color:"#f0f8ff"}}>
+              <Image src={OctreeFreezeFrame}/>
+           </Paper>
           </Col>
           <Col>
             <Typography variant='h4'>
@@ -216,7 +254,7 @@ function App() {
               As a result, the simulation sees a substantial performance boost—especially when managing thousands of agents in real time—making the flocking behavior both scalable and responsive.
             </Typography>
           </Col>
-          <Col>
+          <Col className='border' style={{padding:"1em"}}>
             <ReactP5Wrapper sketch={mySketchOctree}/>
               <Row className='justify-content-md-center'>
                 <Col md = 'auto'>
@@ -235,6 +273,48 @@ function App() {
               </Row>
           </Col>
         </Row>
+
+        {/*Edge Case*/}
+        <Row className='align-items-center' style={{paddingTop:"2em", paddingBottom:"2em"}}>
+          <Col>
+            <Typography variant='h4'>Edge Case</Typography>
+            <Typography variant='body1'>
+              Unless there's some sort of catch or logic to deter the boids away from the canvas' edge, the boid will continue moving and inevitably go outside of the canvas.
+              Typically, for boids simulations, most will implement logic that enables the boids to apear on the opposite side from the edge they cross.
+              As expected, it doesn't really have a natural feel to it. On smaller canvases, it may feel bulky and on larger canvases, it has a tendency to move in a constant straight line.
+              Since there's no deterrence for the boids to change paths, once they've settled into their positions, this causes them to just move in a constant direction.
+              For this boid simulation, instead the typical method of boids appearing on the opposite sides, a linear force acts against the boid's velocity. 
+              The boids are given a visual range in which they can use to see infront of them. 
+            </Typography>
+          </Col>
+          <Col>
+            <SyntaxHighlighter language='typescript' style={a11yDark} >
+              {EdgeCode}
+            </SyntaxHighlighter>
+          </Col>
+        </Row>
+        <Row className='align-items-center'>
+          <Col className='border' sm="auto" style={{paddingTop:"10px"}}>
+            <ReactP5Wrapper sketch={TwoDBoid} />
+          </Col>
+          <Col >
+            <Typography variant='body1'>
+              For this case, the vision range is about 20% of the width and height of their given canvas.
+              The boid is constantly check against this visual boundary.
+              Once the edge is within range of their visual radius, a linear replusion force is applied to their movement. 
+              As they continue to move towards the edge, their direction begins to slowly shift. 
+              This shift causes the boids to move in a almost parabolic path, providing a more natural and logical feel to the simulation.
+              Of course, there are drawbacks to this method. Because of simplicity, more time had to be spent tuning rather than changing the logic.
+              Tuning would be required after any changes in speed or force. An increase in speed meant that the boids needed a greater force acting opposite to them.
+              Similarly, an increase in force also meant tuning was required. A change in the forces of the flocking behaviors meant that boids could resist further.
+              A smaller repulsion meant that there was a risk in which the boids could move outside of the canvas. 
+              A larger force meant that the boids could look unnatural and forced in their turn.  
+              Another issue that arose was that if the force of the boid's movement and the repulsion force equaled, the boid's move in a linear path.
+              To combat this issue, the speed at which the boid is moving and the force applied is normalized to ensure that the boid moves in the same speed in and out.
+            </Typography>
+          </Col>
+        </Row>
+
       </Container>
     </div>
   )

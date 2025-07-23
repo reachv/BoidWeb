@@ -15,7 +15,7 @@ export function mySketchOctree(p5: P5CanvasInstance) {
         };
 
         p5.draw = () => {
-            p5.background(0);
+            p5.background(68, 18, 130);
             p5.orbitControl()
             
             octree.rebuild(flock)
