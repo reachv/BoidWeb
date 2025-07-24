@@ -1,11 +1,6 @@
 import { ReactP5Wrapper } from '@p5-wrapper/react'
 import './App.css'
 import { mySketch } from './boids/sketch'
-import DiscordLogo from "/discord-logo.png"
-import LinkedInLogo from "/linkedin-logo.png"
-import GithubLogo from "/github.png"
-import PolarCord from "/polar_coordinates.png"
-import SphericalCords from "/spherical_coords.png"
 import OctreeFreezeFrame from "/octreefreezeframe.png"
 import { mySketchOctree } from './boids/sketchoctree'
 import  { TwoDBoid } from './boids/2dboid'
@@ -14,7 +9,7 @@ import CohesionGif from '/cohesion.gif'
 import SeparationGif from '/separation.gif'
 
 import { Container, Row, Col, Image, ListGroup, ListGroupItem } from 'react-bootstrap'
-import { Card, CardContent, Paper, Typography } from '@mui/material'
+import { Paper, Typography } from '@mui/material'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -50,47 +45,6 @@ function App() {
           }
       }
     `
-  const OctreeCode = 
-` class Octree{
-    boundary: BoundingBox
-    root: OctreeNode
-    constructor(center: Vector, size: number, maxCapacity = 20) {
-        this.boundary = new BoundingBox(center, size)
-        this.root = new OctreeNode(this.boundary, maxCapacity)
-    }
-    insert(boid : Boid) {
-        return this.root.insert(boid)
-    }
-    queryRadius(center: Vector, radius: number) {
-        return this.root.query(center, radius)
-    }
-    clear() {
-        this.root.clear()
-    }
-    rebuild(boids: Boid[]) {
-        this.clear();
-        for (let i = 0; i < boids.length; i++) {
-            this.insert(boids[i])
-        }
-    }
-    findNeighbors(boid : Boid, radius: number) {
-        let neighbors = this.queryRadius(boid.position, radius);
-        const idx = neighbors.indexOf(boid)
-        if (idx !== -1) {
-            neighbors[idx] = neighbors[neighbors.length - 1]
-            neighbors.pop()
-        }
-        return neighbors;
-    }
-    draw() {
-        p5.push();
-        p5.stroke(100, 100, 255, 100); 
-        p5.strokeWeight(1);
-        p5.noFill();
-        this.root.draw();
-        p5.pop();
-    }
-}`
   const EdgeCode = 
 `edge(){
       let TurningForce = .25
