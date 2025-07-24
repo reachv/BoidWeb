@@ -175,7 +175,7 @@ function App() {
 
         {/*Octree*/}
         <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"5em"}}>
-          <Col sm={"auto"}>
+          <Col>
            <Paper elevation={16} style={{backgroundColor:"rgb(43,43,43)", color:"#f0f8ff"}}>
               <Image src={OctreeFreezeFrame}/>
            </Paper>
