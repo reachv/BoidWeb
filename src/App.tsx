@@ -123,11 +123,11 @@ function App() {
 }`
   return (
     <div>
-      <Container className='justify-content-center' style={{paddingTop:"1em", paddingBottom:"5em"}}>
+      <Container className='justify-content-center' style={{paddingTop:"2em", paddingBottom:"5em"}}>
         
         {/*Backgroup*/}
         <Row className='align-items-center'>
-          <Col className='border' style={{padding:"1em"}}>
+          <Col className='border' style={{padding:"2em"}}>
             <ReactP5Wrapper sketch={mySketch} />
              <Row className='justify-content-md-center'>
                   <Col md = 'auto'>
@@ -155,7 +155,7 @@ function App() {
             </Typography>
           </Col>
         </Row>
-        <Row style={{paddingTop:"1em"}}>
+        <Row style={{paddingTop:"2em"}}>
           <Col>
             <Typography variant='h4'>
               History of boids
@@ -169,7 +169,7 @@ function App() {
         </Row>
 
         {/*Flocking*/}
-        <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"5em"}}>
+        <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"2em"}}>
           <Col>
             <Typography variant='h4'>
               Boids' Behavior
@@ -220,7 +220,7 @@ function App() {
         </Paper>
 
         {/*Octree*/}
-        <Row className='align-items-center' style={{paddingTop:"2em", paddingBottom:"2em"}}>
+        <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"5em"}}>
           <Col sm={"auto"}>
            <Paper elevation={16} style={{backgroundColor:"rgb(43,43,43)", color:"#f0f8ff"}}>
               <Image src={OctreeFreezeFrame}/>
@@ -254,7 +254,7 @@ function App() {
               As a result, the simulation sees a substantial performance boost—especially when managing thousands of agents in real time—making the flocking behavior both scalable and responsive.
             </Typography>
           </Col>
-          <Col className='border' style={{padding:"1em"}}>
+          <Col className='border' style={{padding:"2em"}}>
             <ReactP5Wrapper sketch={mySketchOctree}/>
               <Row className='justify-content-md-center'>
                 <Col md = 'auto'>
@@ -275,7 +275,7 @@ function App() {
         </Row>
 
         {/*Edge Case*/}
-        <Row className='align-items-center' style={{paddingTop:"2em", paddingBottom:"2em"}}>
+        <Row className='align-items-center' style={{paddingTop:"5em", paddingBottom:"2em"}}>
           <Col>
             <Typography variant='h4'>Edge Case</Typography>
             <Typography variant='body1'>
@@ -285,20 +285,6 @@ function App() {
               Since there's no deterrence for the boids to change paths, once they've settled into their positions, this causes them to just move in a constant direction.
               For this boid simulation, instead the typical method of boids appearing on the opposite sides, a linear force acts against the boid's velocity. 
               The boids are given a visual range in which they can use to see infront of them. 
-            </Typography>
-          </Col>
-          <Col>
-            <SyntaxHighlighter language='typescript' style={a11yDark} >
-              {EdgeCode}
-            </SyntaxHighlighter>
-          </Col>
-        </Row>
-        <Row className='align-items-center'>
-          <Col className='border' sm="auto" style={{paddingTop:"10px"}}>
-            <ReactP5Wrapper sketch={TwoDBoid} />
-          </Col>
-          <Col >
-            <Typography variant='body1'>
               For this case, the vision range is about 20% of the width and height of their given canvas.
               The boid is constantly check against this visual boundary.
               Once the edge is within range of their visual radius, a linear replusion force is applied to their movement. 
@@ -311,6 +297,18 @@ function App() {
               A larger force meant that the boids could look unnatural and forced in their turn.  
               Another issue that arose was that if the force of the boid's movement and the repulsion force equaled, the boid's move in a linear path.
               To combat this issue, the speed at which the boid is moving and the force applied is normalized to ensure that the boid moves in the same speed in and out.
+            </Typography>
+          </Col>
+        </Row>
+        <Row className='align-items-center'>
+          <Col className='border' sm="auto" style={{paddingTop:"10px"}}>
+            <ReactP5Wrapper sketch={TwoDBoid} />
+          </Col>
+          <Col >
+            <Typography variant='body1'>
+              <SyntaxHighlighter language='typescript' style={a11yDark} >
+                {EdgeCode}
+              </SyntaxHighlighter>
             </Typography>
           </Col>
         </Row>

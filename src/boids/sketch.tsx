@@ -62,12 +62,12 @@ export function mySketch(p5: P5CanvasInstance) {
                 this.VisualRange = p5.createVector(.2 * p5.width, .2 * p5.height, .2 * p5.width)
                 this.velocity = p5.createVector(p5.random(-4, 4), p5.random(-4,4), p5.random(-4,4))
                 this.velocity.setMag(4)
-                this.maxForce = 0.02
+                this.maxForce = 0.04
                 this.maxSpeed = 8
             }
 
             edge() {
-                let TurningForce = 0.15
+                let TurningForce = 0.3
                 let SteeringVector = p5.createVector()
 
                 if (this.position.x < -p5.width + this.VisualRange.x || this.position.x > p5.width - this.VisualRange.x) {
