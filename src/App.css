@@ -1,9 +1,13 @@
 #root,
 html,
 body {
-    background-color: rgba(33, 37, 41);
-    color: #f0f8ff;
+    background-color: rgb(33, 37, 41);
+    color: #DC2F02;
     font-family: "Roboto Condensed";
+}
+
+pink {
+    color: rgb(255 105 120)
 }
 
 .blur {
