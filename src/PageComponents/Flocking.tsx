@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@mui/material";
 import { Row, Col, Image } from "react-bootstrap";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import {a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { FlockingCode } from "../CodeSnippets/FlockingSnippet";
 import AlignmentGif from '/alignment.gif'
