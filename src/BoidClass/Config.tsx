@@ -17,7 +17,7 @@ export const CONFIG = {
         MAX_FORCE: 3.5,
         INITIAL_SPEED: 9,
         VISUAL_RANGE_FACTOR: 0.4,
-        TURNING_FORCE: 1.8,
+        TURNING_FORCE: 0.9,
         
         // Smoothing parameters
         ACCELERATION_DAMPING: 0.3,

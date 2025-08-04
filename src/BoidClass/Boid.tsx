@@ -26,7 +26,6 @@ export class Boid{
     
     // Level-of-detail optimization
     private updateCounter: number = 0;
-    private isNearCamera: boolean = true;
 
     constructor(p5: P5CanvasInstance<MySketchProps>) {
         this.p5 = p5
@@ -198,17 +197,6 @@ export class Boid{
 
     update(octree: Octree): void {
         this.updateCounter++;
-        
-        // Level-of-detail: Check distance from camera/center for update frequency
-        const distFromCenter = this.position.mag();
-        this.isNearCamera = distFromCenter < CONFIG.LOD_DISTANCE_THRESHOLD;
-        
-        // Skip expensive flocking calculations for distant boids on some frames
-        if (!this.isNearCamera && this.updateCounter % CONFIG.UPDATE_FREQUENCY_FAR !== 0) {
-            // Only update position for distant boids
-            this.position.add(this.velocity);
-            return;
-        }
         
         this.applyForces(octree)
         

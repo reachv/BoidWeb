@@ -11,31 +11,31 @@ export function Edge(){
         <>
         <Row className='align-items-top' style={{padding:"2em", paddingBottom:"2em"}}>
           <Col xs={8}>
-          <Row>
-            <Typography variant='h4'>{PAGE_CONFIG.EDGE_CONTENT.title}</Typography>
-          </Row>
-          <Row>
-            <Col xs={6}>
-            <Typography variant='body1'>{PAGE_CONFIG.EDGE_CONTENT.body}</Typography>
-            </Col>
-            <Col xs={6}>
-              <strong>{PAGE_CONFIG.EDGE_CONTENT.implements.pros.title}</strong>
-              <ul>
-                {PAGE_CONFIG.EDGE_CONTENT.implements.pros.list.map((text) =>(
-                  <li>{text}</li>
-                ))}
-              </ul>
-              <strong>{PAGE_CONFIG.EDGE_CONTENT.implements.cons.title}</strong>
-              <ul>
-                {PAGE_CONFIG.EDGE_CONTENT.implements.cons.list.map((text) =>(
-                  <li>{text}</li>
-                ))}
-              </ul>
-            </Col>
-          </Row>
+            <Row>
+              <Typography variant='h4'>{PAGE_CONFIG.EDGE_CONTENT.title}</Typography>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <Typography variant='body1'>{PAGE_CONFIG.EDGE_CONTENT.body}</Typography>
+              </Col>
+              <Col xs={6}>
+                <strong>{PAGE_CONFIG.EDGE_CONTENT.implements.pros.title}</strong>
+                <ul>
+                  {PAGE_CONFIG.EDGE_CONTENT.implements.pros.list.map((text) =>(
+                    <li>{text}</li>
+                  ))}
+                </ul>
+                <strong>{PAGE_CONFIG.EDGE_CONTENT.implements.cons.title}</strong>
+                <ul>
+                  {PAGE_CONFIG.EDGE_CONTENT.implements.cons.list.map((text) =>(
+                    <li>{text}</li>
+                  ))}
+                </ul>
+              </Col>
+            </Row>
           </Col>
-          <Col xs={4}>
-            <Row ref={elementRef} style = {{maxWidth:"100%", paddingTop:"0.5em"}}>
+          <Col xs={4} style={{padding:"2em"}}>
+            <Row  ref={elementRef} style = {{paddingTop:"0.5em"}}>
               {show && <ReactP5Wrapper sketch={TwoDBoid(width)} size = {elementRef.current?.offsetWidth}/>}
             </Row>
           </Col>

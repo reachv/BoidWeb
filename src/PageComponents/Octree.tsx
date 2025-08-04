@@ -24,7 +24,7 @@ const OctreeVisualization = memo(({ imageSrc, imageAlt, width }: OctreeVisualiza
   return (
     <Paper 
       elevation={16} 
-      style={{ backgroundColor: "rgb(43,43,43)", color: "#f0f8ff" }}
+      style={{ padding:"2em", backgroundColor: PAGE_CONFIG.COLOR_PALETTE.SKETCH_COLOR, color: "#f0f8ff" }}
       role="img"
       aria-label={imageAlt}
     >
@@ -41,7 +41,7 @@ const OctreeVisualization = memo(({ imageSrc, imageAlt, width }: OctreeVisualiza
 });
 
 export function Octree(){
-    const {elementRef, width} = useElementWidth()
+    const {elementRef, width, show} = useElementWidth()
     return(
       <>
         <Row className='align-items-center' style={{padding:"2em"}}>
@@ -80,9 +80,9 @@ export function Octree(){
                 {PAGE_CONFIG.OCTREE_CONTENT.optimization.conclusion}
             </Typography>
           </Col>
-          <Col xs={6} className="border rounded justify-content-center align-items-center" style={{padding:"2em", textAlign:"center", backgroundColor:PAGE_CONFIG.SECONDARY_COLOR}}>
+          <Col xs={6} className="border rounded justify-content-center align-items-center" style={{padding:"2em", textAlign:"center", backgroundColor:PAGE_CONFIG.COLOR_PALETTE.SKETCH_COLOR}}>
             <Row ref={elementRef} className='justify-content-center' style={{maxWidth:"100%"}}>
-              <ReactP5Wrapper sketch={mySketch} draw={true} n={500} size={elementRef.current?.offsetWidth} />
+              {show && <ReactP5Wrapper sketch={mySketch(width, 1000)} draw={true} size={elementRef.current?.offsetWidth} />}
             </Row>
             {Instruction()}
           </Col>

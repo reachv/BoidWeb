@@ -7,16 +7,16 @@ import { useElementWidth } from "../Handlers/SketchResizeHandlers";
 import { Instruction } from "./Instructions";
 
 export function Header(){
-    const {elementRef} = useElementWidth()
+    const {elementRef, width, show} = useElementWidth()
 
     return (
         <div>
             <Row className='align-items-center'>
                 <Col xs={6} style={{padding:"2em"}}>
                     <Row className='justify-content-center'>
-                        <Col className="border rounded align-item-center" style={{padding:"2em", textAlign:"center", backgroundColor:PAGE_CONFIG.SECONDARY_COLOR}}>
+                        <Col className="border rounded align-item-center" style={{padding:"2em", textAlign:"center", backgroundColor:PAGE_CONFIG.COLOR_PALETTE.SKETCH_COLOR}}>
                             <Row ref={elementRef} style={{maxWidth:"100%"}}>
-                                <ReactP5Wrapper sketch={mySketch} n={1500} size={elementRef.current?.offsetWidth} />
+                                {show && <ReactP5Wrapper sketch={mySketch(width, 1500)} size={elementRef.current?.offsetWidth} />}
                             </Row>
                             {Instruction()}
                         </Col>

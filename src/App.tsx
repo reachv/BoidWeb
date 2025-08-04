@@ -8,8 +8,8 @@ import { PAGE_CONFIG } from './PageComponents/PageConfig'
 
 function App() {
   return (
-    <div>
-      <Container fluid='xxl' className='justify-content-center' style={{paddingTop:"2em", paddingBottom:"2em", backgroundColor: PAGE_CONFIG.PRIMARY_COLOR}}>
+    <div style={{borderRadius: "2em", padding:"1em"}}>
+      <Container fluid='xxl' className='rounded justify-content-center' style={{paddingTop:"2em", paddingBottom:"2em", backgroundColor: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR}}>
         {/* HEADER */}
         {Header()}
         {/* FLOCKING */}

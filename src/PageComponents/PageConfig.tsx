@@ -1,11 +1,14 @@
+
 export const PAGE_CONFIG = {
     COLOR_PALETTE:{
-        TEXT_COLOR: "#03071E"
+        CONTAINER_COLOR: "#035385",
+        TEXT_COLOR: "#03071E",
+        SKETCH_COLOR: "#67C4E6",
+        LIST_GROUP_ITEM_BACKGROUND: "#035385",
+        LIST_GROUP_ITEM_TEXT: "#ffffff"
     },
     PRIMARY_COLOR: "#03071E",
     SECONDARY_COLOR: "#DC2F02",
-    LIST_GROUP_ITEM_BACKGROUND: "#F6AA1C",
-    LIST_GROUP_ITEM_TEXT: "#941B0C",
     OCTREE_CONTENT: {
         title: "Octree Optimization",
         introduction: `To efficiently simulate large-scale flocking behavior, boids must continuously identify nearby neighbors within a defined vision radius. 

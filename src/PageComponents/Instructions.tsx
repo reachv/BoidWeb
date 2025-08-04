@@ -19,8 +19,8 @@ export function Instruction(){
                           <ListGroupItem
                             key={id}
                             style={{
-                              backgroundColor: PAGE_CONFIG.LIST_GROUP_ITEM_BACKGROUND,
-                              color: PAGE_CONFIG.LIST_GROUP_ITEM_TEXT
+                              backgroundColor: PAGE_CONFIG.COLOR_PALETTE.LIST_GROUP_ITEM_BACKGROUND,
+                              color: PAGE_CONFIG.COLOR_PALETTE.LIST_GROUP_ITEM_TEXT
                             }}
                             role="listitem"
                           >

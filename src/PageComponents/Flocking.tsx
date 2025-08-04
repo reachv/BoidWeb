@@ -6,6 +6,7 @@ import { FlockingCode } from "../CodeSnippets/FlockingSnippet";
 import AlignmentGif from '/alignment.gif'
 import CohesionGif from '/cohesion.gif'
 import SeparationGif from '/separation.gif'
+import { PAGE_CONFIG } from "./PageConfig";
 
 export function Flocking(){
 
@@ -38,14 +39,14 @@ export function Flocking(){
                 </Col>
                 <Col>
                     <Paper elevation={16}>
-                        <SyntaxHighlighter language='typescript' style={a11yDark}>
+                        <SyntaxHighlighter language="typescript" style={a11yDark}>
                             {FlockingCode}
                         </SyntaxHighlighter>
                     </Paper>
                 </Col>
             </Row>
             <Row style={{padding:"2em"}}>
-                <Paper elevation={16} style={{backgroundColor:"rgb(43,43,43)", color:"#f0f8ff"}}>
+                <Paper elevation={16} style={{backgroundColor:PAGE_CONFIG.COLOR_PALETTE.SKETCH_COLOR, color:PAGE_CONFIG.COLOR_PALETTE.LIST_GROUP_ITEM_TEXT}}>
                     <Row style={{padding:"1em", textAlign:"center"}}>
                         <Col>
                             <Typography variant='h6'>Alignment</Typography>
