@@ -9,7 +9,7 @@ import { PAGE_CONFIG } from './PageComponents/PageConfig'
 function App() {
   return (
     <div style={{borderRadius: "2em", padding:"1em"}}>
-      <Container fluid='xxl' className='rounded justify-content-center' style={{paddingTop:"2em", paddingBottom:"2em", backgroundColor: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR}}>
+      <Container fluid='xxl' className='rounded justify-content-center' style={{padding:"2em", backgroundColor: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR}}>
         {/* HEADER */}
         {Header()}
         {/* FLOCKING */}

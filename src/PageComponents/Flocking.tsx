@@ -45,7 +45,7 @@ export function Flocking(){
                     </Paper>
                 </Col>
             </Row>
-            <Row style={{padding:"2em"}}>
+            <Row style={{padding:"2em", paddingTop:"1em"}}>
                 <Paper elevation={16} style={{backgroundColor:PAGE_CONFIG.COLOR_PALETTE.SKETCH_COLOR, color:PAGE_CONFIG.COLOR_PALETTE.LIST_GROUP_ITEM_TEXT}}>
                     <Row style={{padding:"1em", textAlign:"center"}}>
                         <Col>

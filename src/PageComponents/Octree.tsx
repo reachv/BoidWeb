@@ -44,7 +44,7 @@ export function Octree(){
     const {elementRef, width, show} = useElementWidth()
     return(
       <>
-        <Row className='align-items-center' style={{padding:"2em"}}>
+        <Row className='align-items-center' style={{padding:"2em", paddingBottom:"0em"}}>
           <Col>
             <Row style={{textAlign:"center"}}>
               <OctreeVisualization 
@@ -68,7 +68,7 @@ export function Octree(){
             </Typography>
           </Col>
         </Row>
-        <Row className='align-items-center' style={{padding:"2em"}}>
+        <Row className='align-items-center' style={{padding:"2em", paddingBottom:"0em"}}>
           <Col>
             <Typography variant="h4">{PAGE_CONFIG.OCTREE_CONTENT.optimization.title}</Typography>
             <Typography variant='body1'>
