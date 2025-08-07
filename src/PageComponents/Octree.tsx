@@ -18,7 +18,7 @@ export function Octree(){
             <Row style={{paddingTop:"2em"}}>
               <Row><Typography variant="h2" style={{paddingBottom:"0.5em"}}>{PAGE_CONFIG.OCTREE_CONTENT.TITLE}</Typography></Row>
               <Row><Typography variant="body1">{PAGE_CONFIG.OCTREE_CONTENT.CONTENT}</Typography></Row>
-              <Row style={{paddingTop: "2em", paddingBottom:"2em"}}><Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/></Row>
+              <Row className='justify-content-center' style={{paddingTop: "2em", paddingBottom:"2em"}}><Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/></Row>
               <Row><Typography variant="body1">{PAGE_CONFIG.OCTREE_CONTENT.OPTIMIZATION}</Typography></Row>
               <Row style={{paddingTop:"2em", paddingBottom:"2em"}}><Typography variant="body1">That being said, here's it working in real-time.</Typography></Row>
               <Row className='justify-content-center'>

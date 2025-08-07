@@ -77,7 +77,7 @@ export class OctreeNode{
     private subdivide(): void {
         const { center, size } = this.boundary;
         const newSize = size * 0.5;
-        const offset = newSize * 0.5;
+        const offset = newSize;
 
         this.children = OctreeNode.CHILD_OFFSETS.map(([ox, oy, oz]) => {
             const childCenter = center.copy();
