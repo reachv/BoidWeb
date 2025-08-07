@@ -4,7 +4,6 @@ import { Header } from './PageComponents/Header'
 import { Flocking } from './PageComponents/Flocking'
 import { Octree } from './PageComponents/Octree'
 import { Edge } from './PageComponents/Edge'
-import { sidebar } from './PageComponents/SideBar'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './Theme'
 
