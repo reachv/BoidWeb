@@ -18,7 +18,7 @@ function App() {
           <Col >
             <Container fluid className='rounded justify-content-center' style={{
               padding:"2em",
-              background: "linear-gradient(135deg, rgba(10, 25, 47, 0.95) 0%, rgba(17, 34, 64, 0.95) 100%)",
+              background: "rgb(43,43,43)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.1)"
             }}>
               {/* HEADER */}

@@ -4,11 +4,15 @@ import { CONFIG } from '../BoidClass/Config';
 import type { MySketchProps } from '../BoidClass/MySketchProps';
 
 
-export function TwoDBoid(INITAL_SIZE: number){
-    const sketch = (p5: P5CanvasInstance<MySketchProps>) =>{
+export function TwoDBoid (INITIAL_SIZE: number){
+    const sketch = (p5: P5CanvasInstance<MySketchProps>) => {
         let flock : Boid[] = []
         p5.setup = () => {
-                p5.createCanvas(INITAL_SIZE, INITAL_SIZE)
+            if(INITIAL_SIZE > 750){
+                p5.createCanvas(750, 750);
+            }else{
+                p5.createCanvas(INITIAL_SIZE, INITIAL_SIZE);
+            }
                 for(let i: number = 0; i < 250; i++){
                     flock.push(new Boid())
                 }
@@ -24,13 +28,16 @@ export function TwoDBoid(INITAL_SIZE: number){
 
 
         p5.updateWithProps = (props) => {
-            if(props.size){
-                let CANVAS_SIZE = props.size
-                p5.resizeCanvas(CANVAS_SIZE, CANVAS_SIZE)
+            if (props.size && props.size !== p5.width) {
+                if(props.size > 750){
+                    p5.resizeCanvas(750, 750)
+                }else{
+                    p5.resizeCanvas(props.size, props.size);
+                }
             }
         }
 
-        class Boid{
+        class Boid {
             position: Vector
             velocity: Vector
             acceleration: Vector
@@ -137,10 +144,12 @@ export function TwoDBoid(INITAL_SIZE: number){
                             this.velocity.mult(this.maxSpeed)
                 }
             }
+
             applyForce(boids: Boid[]){
                 this.edge()
                 this.flock(boids)
             }
+
             update(boids: Boid[]){
                 this.applyForce(boids)
                 this.position.add(this.velocity)
@@ -149,6 +158,7 @@ export function TwoDBoid(INITAL_SIZE: number){
                 this.acceleration.mult(0.15)
                 this.show()
             }
+            
             show(){
                 p5.strokeWeight(2)
                 p5.stroke(255)

@@ -15,7 +15,7 @@ export const theme = createTheme({
         fontSize:"1em"
     },
     fontFamily: [
-      'roboto-condensed', // Your desired font
+      'Roboto Condensed', // Your desired font
     ].join(','),
   },
 });

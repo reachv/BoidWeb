@@ -20,7 +20,7 @@ export const PAGE_CONFIG = {
         The naive approach involves scanning all other boids in the system, which becomes pretty intensive on the hardware as the number of boids increases.
         For example, in a simulation of 2000 boids, it would be necessary to run roughly 4,000,000 comparisons per frame. 
         Since each boid needs to be check against every other boid, this means that 1 boid means roughly 2000 comparisons, 2000 boids means 4,000,000 comparisons, effectively making this an O(n^2) time complexity. 
-        Instead, an octree implementation helps efficiently and effectively manage large numbers of boids.
+        Instead, we can use an octree implementation to help efficiently and effectively manage large numbers of boids.
         `,
         CONTENT: `So, what is an octree? Like it's name, an octree divides a 3 dimensional space into 8 sub-sections.
         Within these 8 sub-sections, boids are stored using their current positioning. 
@@ -95,8 +95,6 @@ export const PAGE_CONFIG = {
         Similarly, the boid's velocity also needs to be a 3 dimensional vector for it to move correctly.
         I also randomized their velocity vector. This creates an initial chaos within the boids.
         To mimic real-life birds, I gave the boids a visual range that they use to detect edges.
-        Once that's done, I also created four temporary vectors to optimize calculations and avoid unnecessary garbage collections.`,
-
-        CODING_TEXT_TRANSITION: `Afterwards, it was just a matter of implementing the above 3 behaviors and calculating the force they apply.`,
+        Afterwards, it was just a matter of implementing the above 3 behaviors and calculating the force they apply.`,
     }
 }

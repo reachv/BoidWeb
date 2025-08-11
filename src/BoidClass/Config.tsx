@@ -1,5 +1,10 @@
 
 export const CONFIG = {
+    
+    // Camera Location
+    CAMERA_LOCATION: [2218.73829884712,-564.3011674295059,2212.6850185941225],
+
+    //SETUP
     BOID_COUNT: 1500,
     CANVAS_SCALE: .5,
     OCTREE_MAX_CAPACITY: 50,
@@ -9,7 +14,6 @@ export const CONFIG = {
     MAX_NEIGHBORS_PER_BOID: 15,
     LOD_DISTANCE_THRESHOLD: 200,
     UPDATE_FREQUENCY_FAR: 3,
-
     
     // Boid behavior parameters
     BOID: {
@@ -43,6 +47,6 @@ export const CONFIG = {
         BOID_COLOR: [77, 255, 243] as const,
         BOUNDARY_COLOR: [255, 255, 255] as const,
         BOUNDARY_WEIGHT: 5,
-        BOID_WEIGHT: 1,
+        BOID_WEIGHT: 3,
     }
 } as const;

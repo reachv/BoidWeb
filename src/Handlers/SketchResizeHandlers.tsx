@@ -9,7 +9,7 @@ export function useElementWidth() {
     useEffect(() => {
         const handleResize = () => {
             if (elementRef.current) {
-                const newWidth = elementRef.current.clientWidth > 750 ? 750: elementRef.current.clientWidth;
+                const newWidth = elementRef.current.clientWidth;
                 setWidth(newWidth);
                 setHeight(elementRef.current.clientHeight);
                 console.log('Element width:', newWidth);

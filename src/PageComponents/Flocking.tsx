@@ -12,10 +12,9 @@ export function Flocking(){
 
     return(
         <>
-            <Row style={{paddingBottom:"1em"}}>
+            <Row style={{paddingTop:"2em", paddingBottom:"1em"}}>
                 <Col xs={4}/>
                 <Col xs={8} className="justify-content-end">
-                    <Row><Typography variant="h2" style={{paddingTop:"0.5em", paddingBottom:"0.5em"}}>Flocking Behaviors</Typography></Row>
                     <Row><Typography variant="body1">{PAGE_CONFIG.FLOCKING_CONTENT.BACKGROUND}</Typography></Row>
                     <Row><Typography variant="body1" style={{paddingTop:"2em", paddingBottom:"2em"}}>{PAGE_CONFIG.FLOCKING_CONTENT.BACKGROUND_TRANSITION}</Typography></Row>
                 </Col>
@@ -40,11 +39,11 @@ export function Flocking(){
                     </Row>
                 </Col>
             </Row>
-            <Row style={{paddingTop:"4em"}}>
+            <Row style={{paddingTop:"4em", paddingBottom:"4em"}}>
                 <Col xs={4}/>
                 <Col xs={8} className="justify-content-end">
+                    <Row><Typography variant="h2" style={{paddingTop:"0.5em", paddingBottom:"0.5em"}}>Flocking Behaviors</Typography></Row>
                     <Row><Typography variant="body1">{PAGE_CONFIG.FLOCKING_CONTENT.CODING_TEXT}</Typography></Row>
-                    <Row><Typography variant="body1" style={{paddingTop:"2em", paddingBottom:"2em"}}>{PAGE_CONFIG.FLOCKING_CONTENT.CODING_TEXT_TRANSITION}</Typography></Row>
                 </Col>
             </Row>
             <Row>
