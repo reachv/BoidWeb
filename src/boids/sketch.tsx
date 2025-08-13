@@ -12,16 +12,15 @@ function renderBoidsBatch(p5: P5CanvasInstance<MySketchProps>, boids: Boid[]): v
     // Set rendering properties once for all boids
     p5.strokeWeight(CONFIG.VISUAL.BOID_WEIGHT);
     
-    const cameraPos = [...CONFIG.CAMERA_LOCATION];
-    
     // Calculate max distance from camera to furthest corner of bounding box
     const halfSize = p5.width / 2;
-    const corner = [-halfSize, halfSize, -halfSize];
+    const FAR_CORNER = [-halfSize, halfSize, -halfSize];
+    const CLOSE_CORNER = [halfSize, -halfSize, halfSize]
 
 
-    const dx = cameraPos[0] - corner[0];
-    const dy = cameraPos[1] - corner[1];
-    const dz = cameraPos[2] - corner[2];
+    const dx = CLOSE_CORNER[0] - FAR_CORNER[0];
+    const dy = CLOSE_CORNER[1] - FAR_CORNER[1];
+    const dz = CLOSE_CORNER[2] - FAR_CORNER[2];
     const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
     
@@ -29,9 +28,9 @@ function renderBoidsBatch(p5: P5CanvasInstance<MySketchProps>, boids: Boid[]): v
     for (const boid of boids) {
         const [x, y, z] = boid.getPositionData();
 
-        const dx = cameraPos[0] - x;
-        const dy = cameraPos[1] - y;
-        const dz = cameraPos[2] - z;
+        const dx = CLOSE_CORNER[0] - x;
+        const dy = CLOSE_CORNER[1] - y;
+        const dz = CLOSE_CORNER[2] - z;
         const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
         const normalizedDistance = Math.min(distance / dist, 1);
         const opacity = (1 - normalizedDistance) * 255;
