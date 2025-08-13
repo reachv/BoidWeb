@@ -1,9 +1,9 @@
 #root,
 html,
 body {
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(25, 25, 25);
     min-height: 100vh;
-    color: #CCD6F6;
+    color: #ffffff;
     font-family: "Roboto Condensed";
 }
 

@@ -6,29 +6,43 @@ import { Octree } from './PageComponents/Octree'
 import { Edge } from './PageComponents/Edge'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './Theme'
+import { PAGE_CONFIG } from './PageComponents/PageConfig'
+import { sidebar } from './PageComponents/SideBar'
+import { useElementWidth } from './Handlers/SketchResizeHandlers'
+import { useState, useEffect } from 'react'
 
 function App() {
-
+  const {elementRef, width} = useElementWidth()
+  const [showSidebar, setShowSidebar] = useState(false)
+  
+  useEffect(() => {
+    setShowSidebar(width > 1200)
+  }, [width])
   return (
     <ThemeProvider theme={theme}>
       <div style={{borderRadius: "2em", padding:"1em"}}>
-        <Row>
+        <Row ref={elementRef} >
           <Col xs={2}>
+            {showSidebar && (
+              <Row style={{position:"fixed", top:"40vh"}}>
+                {sidebar()}
+              </Row>
+            )}
           </Col>
-          <Col >
+          <Col>
             <Container fluid className='rounded justify-content-center' style={{
               padding:"2em",
-              background: "rgb(43,43,43)",
+              background: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR,
               boxShadow: "0 8px 32px rgba(0,0,0,0.1)"
             }}>
               {/* HEADER */}
               {Header()}
               {/* FLOCKING */}
-              {Flocking()}
-              {/* OCTREE */}
-              {Octree()}
+              {Flocking(!showSidebar)}
               {/* EDGE */}
               {Edge()}
+              {/* OCTREE */}
+              {Octree()}
             </Container>
           </Col>
         </Row>

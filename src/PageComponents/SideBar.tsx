@@ -10,14 +10,14 @@ export function sidebar(){
     return (
         <>
             <Typography variant="body1">
-                <p>Written by</p>
-                <p style={{fontSize:"20px"}}>Reach Vann</p>
-                <p style={{paddingTop:"10px"}}>Published</p>
-                <p style={{fontSize:"20px"}}>2025.07.21</p>
+                <Typography variant="body1">Written by</Typography>
+                <Typography variant="h3">Reach Vann</Typography>
+                <Typography variant="body1">Published</Typography>
+                <Typography variant="h3">2025.07.21</Typography>
                 <p>Contact me on</p>    
                 <Row>
                     <Col md={'auto'} style={{paddingTop:"0.5em"}}>
-                        <Nav className="justify-content-end">
+                        <Nav >
                             <Nav.Item>
                                 <a href="https://discord.com/users/208755414181871627">
                                     <Image src={DiscordLogo} style={{ height: "32px", width: "32px" }}/>
@@ -26,7 +26,7 @@ export function sidebar(){
                         </Nav>
                     </Col>
                     <Col md={'auto'} style={{paddingTop:"0.5em"}}>
-                        <Nav className="justify-content-end">
+                        <Nav >
                             <Nav.Item>
                                 <a href="https://www.linkedin.com/in/reach-vann-8b24691b0/">
                                     <Image src={LinkedInLogo} style={{ height: "32px", width: "32px" }}/>
@@ -35,7 +35,7 @@ export function sidebar(){
                         </Nav>
                     </Col>
                     <Col md={'auto'} style={{paddingTop:"0.5em"}}>
-                        <Nav className="justify-content-end">
+                        <Nav >
                             <Nav.Item>
                                 <a href="https://github.com/reachv/">
                                     <Image src={GithubLogo} style={{ height: "32px", width: "32px" }}/>
