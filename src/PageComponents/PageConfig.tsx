@@ -1,7 +1,7 @@
 
 export const PAGE_CONFIG = {
     COLOR_PALETTE:{
-        CONTAINER_COLOR: "#232323",
+        CONTAINER_COLOR: "#000000ff",
         TEXT_COLOR: "#0A192F",
         SKETCH_COLOR: "#64FFDA",
         LIST_GROUP_ITEM_BACKGROUND: "#112240",

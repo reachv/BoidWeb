@@ -12,7 +12,7 @@ export function Header(){
         <div>
             <Row>
                 <Typography variant="h1" style={{paddingBottom:"0.5em"}}>
-                        A Guide to Emulating Flocking Birds using Boids
+                        A Guide to Writing Birds
                 </Typography>
             </Row>
             <Row className='align-items-center'>

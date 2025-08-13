@@ -12,7 +12,8 @@ export function Edge(){
             <Col xs={4}/>
             <Col xs={8}>
               <Row><Typography variant="h2">{TEXT_CONFIG.EDGE_CONTENT.TITLE}</Typography></Row>
-              <Row><Typography variant="body1" style={{paddingTop:"2em", paddingBottom:"2em"}}>{TEXT_CONFIG.EDGE_CONTENT.BODY}</Typography></Row>
+              <Row><Typography variant="body1" style={{paddingTop:"1em", paddingBottom:"2em"}}>{TEXT_CONFIG.EDGE_CONTENT.BODY[0]}</Typography></Row>
+              <Row><Typography variant="body1" style={{paddingBottom:"2em"}}>{TEXT_CONFIG.EDGE_CONTENT.BODY[1]}</Typography></Row>
               <Row><Typography variant="body1">This is the 2d and 3d implementation of linear replusion.</Typography></Row>
             </Col>
           </Row>
@@ -27,7 +28,8 @@ export function Edge(){
           <Row style={{paddingTop:"2em"}}>
             <Col xs={4}/>
             <Col xs={8}>
-              <Row><Typography variant="body1">{TEXT_CONFIG.EDGE_CONTENT.TRANSITION}</Typography></Row>
+              <Row><Typography variant="body1" style={{paddingTop:"2em", paddingBottom:"2em"}}>{TEXT_CONFIG.EDGE_CONTENT.TRANSITION[0]}</Typography></Row>
+              <Row><Typography variant="body1">{TEXT_CONFIG.EDGE_CONTENT.TRANSITION[1]}</Typography></Row>
             </Col>
           </Row>
         </>

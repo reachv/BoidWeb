@@ -4,7 +4,7 @@ import { Header } from './PageComponents/Header'
 import { Flocking } from './PageComponents/Flocking'
 import { Octree } from './PageComponents/Octree'
 import { Edge } from './PageComponents/Edge'
-import { ThemeProvider } from '@mui/material'
+import { responsiveFontSizes, ThemeProvider, Typography } from '@mui/material'
 import { theme } from './Theme'
 import { PAGE_CONFIG } from './PageComponents/PageConfig'
 import { sidebar } from './PageComponents/SideBar'
@@ -18,9 +18,11 @@ function App() {
   useEffect(() => {
     setShowSidebar(width > 1200)
   }, [width])
+  let newTheme = responsiveFontSizes(theme)
   return (
-    <ThemeProvider theme={theme}>
-      <div style={{borderRadius: "2em", padding:"1em"}}>
+    <ThemeProvider theme={newTheme}>
+      <Row style={{paddingLeft:"1em", paddingTop:"1em"}}><Typography variant='h1'>Reach Vann</Typography></Row>
+      <div style={{borderRadius: "2em", padding:"1em", paddingTop:"5em"}}>
         <Row ref={elementRef} >
           <Col xs={2}>
             {showSidebar && (

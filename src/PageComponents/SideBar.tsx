@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material"
 import { Col, Image, Nav, Row } from "react-bootstrap"
-import DiscordLogo from "/discord-logo.png"
 import LinkedInLogo from "/linkedin-logo.png"
 import GithubLogo from "/github.png"
 
@@ -9,22 +8,13 @@ export function sidebar(){
 
     return (
         <>
-            <Typography variant="body1">
-                <Typography variant="body1">Written by</Typography>
-                <Typography variant="h3">Reach Vann</Typography>
-                <Typography variant="body1">Published</Typography>
-                <Typography variant="h3">2025.07.21</Typography>
-                <p>Contact me on</p>    
+            <Typography>
+                <Typography variant="subtitle1">Written by</Typography>
+                <Typography variant="body2">Reach Vann</Typography>
+                <Typography variant="subtitle1">Published</Typography>
+                <Typography variant="body2">2025.07.21</Typography>
+                <Typography variant="subtitle1">Contact me on</Typography>  
                 <Row>
-                    <Col md={'auto'} style={{paddingTop:"0.5em"}}>
-                        <Nav >
-                            <Nav.Item>
-                                <a href="https://discord.com/users/208755414181871627">
-                                    <Image src={DiscordLogo} style={{ height: "32px", width: "32px" }}/>
-                                </a>
-                            </Nav.Item>
-                        </Nav>
-                    </Col>
                     <Col md={'auto'} style={{paddingTop:"0.5em"}}>
                         <Nav >
                             <Nav.Item>

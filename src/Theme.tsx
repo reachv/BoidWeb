@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   typography: {
+    fontSize: 14,
     h1:{
       fontSize: "4em"
     },
@@ -16,6 +17,9 @@ export const theme = createTheme({
     },
     body2:{
         fontSize:"1em"
+    },
+    subtitle1:{
+        fontSize:"0.5em"
     },
     fontFamily: [
       'Roboto Condensed', // Your desired font
