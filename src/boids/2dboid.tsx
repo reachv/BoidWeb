@@ -161,7 +161,7 @@ export function TwoDBoid (INITIAL_SIZE: number){
             
             show(){
                 p5.strokeWeight(2)
-                p5.stroke(255)
+                p5.stroke(...CONFIG.VISUAL.BOID_COLOR)
                 p5.point(this.position.x, this.position.y)
             }
         }

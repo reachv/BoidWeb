@@ -21,7 +21,7 @@ export const CONFIG = {
         MAX_FORCE: 3.5,
         INITIAL_SPEED: 9,
         VISUAL_RANGE_FACTOR: 0.4,
-        TURNING_FORCE: 0.6,
+        TURNING_FORCE: 0.35,
         
         // Smoothing parameters
         ACCELERATION_DAMPING: 0.3,
@@ -43,7 +43,7 @@ export const CONFIG = {
     
     // Visual settings
     VISUAL: {
-        BACKGROUND: [80, 61, 63] as const,
+        BACKGROUND: [100, 3, 14] as const,
         BOID_COLOR: [77, 255, 243] as const,
         BOUNDARY_COLOR: [255, 255, 255] as const,
         BOUNDARY_WEIGHT: 5,
