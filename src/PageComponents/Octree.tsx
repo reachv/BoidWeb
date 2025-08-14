@@ -17,8 +17,8 @@ export function Octree(){
           <Col xs={4}/>
           <Col xs={8}>
             <Row>
-              <Row className='justify-content-center' style={{paddingTop: "4em", paddingBottom:"4em"}}><Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/></Row>
-              <Row><Typography variant="h2" style={{paddingBottom:"0.5em"}}>{TEXT_CONFIG.OCTREE_CONTENT.TITLE}</Typography></Row>
+              <Row className='justify-content-center' style={{paddingTop: "4em", paddingBottom:"2em"}}><Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/></Row>
+              <Row><Typography variant="h2" style={{paddingBottom:"1em", paddingTop:"1em"}}>{TEXT_CONFIG.OCTREE_CONTENT.TITLE}</Typography></Row>
               <Row><Typography variant="body1">{TEXT_CONFIG.OCTREE_CONTENT.CONTENT}</Typography></Row>
             </Row>
           </Col>

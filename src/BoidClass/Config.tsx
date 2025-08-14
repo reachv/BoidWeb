@@ -43,10 +43,12 @@ export const CONFIG = {
     
     // Visual settings
     VISUAL: {
-        BACKGROUND: [100, 156, 185] as const,
-        BOID_COLOR: [77, 255, 243] as const,
+        BACKGROUND: [153, 255, 248] as const,
+        BOID_COLOR: [0,0,0] as const,
         BOUNDARY_COLOR: [255, 255, 255] as const,
         BOUNDARY_WEIGHT: 5,
         BOID_WEIGHT: 3,
     }
 } as const;
+
+

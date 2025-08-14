@@ -189,7 +189,7 @@ export class OctreeNode{
         const alpha = 60 + (this.depth * 30);
         
         p5.stroke(r, g, b, alpha);
-        p5.strokeWeight(1 + this.depth * 0.5);
+        p5.strokeWeight(2 + this.depth * 0.5);
         this.boundary.draw(p5);
         p5.pop();
 

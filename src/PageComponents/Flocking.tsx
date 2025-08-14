@@ -59,11 +59,11 @@ export function Flocking(display: Boolean = false){
                     <SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[1]}</SyntaxHighlighter>
                 </Col>
             </Row>
-            <Row style={{paddingTop:"2em", paddingBottom:"4em"}}>
+            <Row style={{paddingTop:"2em", paddingBottom:"2em"}}>
                 <Col xs={4}/>
                 <Col xs={8} className="justify-content-end">
                     <Row><Typography variant="body1">{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[0]}</Typography></Row>
-                    <Row ref={elementRef}><Col style={{textAlign:"center", paddingTop:"4em", paddingBottom:"4em"}}>{show && <ReactP5Wrapper sketch={TwoDBoid(width)} size={width}/>}</Col></Row>
+                    <Row ref={elementRef}><Col style={{textAlign:"center", paddingTop:"4em"}}>{show && <ReactP5Wrapper sketch={TwoDBoid(width)} size={width}/>}</Col></Row>
                     <Row><Typography variant="body1">{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[1]}</Typography></Row>
                 </Col>
             </Row>

@@ -21,8 +21,8 @@ function App() {
   let newTheme = responsiveFontSizes(theme)
   return (
     <ThemeProvider theme={newTheme}>
-      <Row style={{paddingLeft:"1em", paddingTop:"1em"}}><Typography variant='h1'>Reach Vann</Typography></Row>
-      <div style={{borderRadius: "2em", padding:"1em", paddingTop:"5em"}}>
+      <Row style={{paddingLeft:"2em", paddingTop:"2em"}}><Typography variant='h1'>Reach Vann</Typography></Row>
+      <div style={{borderRadius: "2em", padding:"2em", paddingTop:"5em"}}>
         <Row ref={elementRef} >
           <Col xs={2}>
             {showSidebar && (
@@ -35,7 +35,6 @@ function App() {
             <Container fluid className='rounded justify-content-center' style={{
               padding:"2em",
               background: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR,
-              boxShadow: "0 8px 32px rgba(0,0,0,0.1)"
             }}>
               {/* HEADER */}
               {Header()}

@@ -11,7 +11,7 @@ export function Header(){
     return (
         <div>
             <Row>
-                <Typography variant="h1" style={{paddingBottom:"0.5em"}}>
+                <Typography variant="h2" style={{paddingBottom:"0.5em"}}>
                         A Guide to Writing Birds
                 </Typography>
             </Row>

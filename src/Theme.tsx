@@ -2,15 +2,16 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   typography: {
-    fontSize: 14,
     h1:{
-      fontSize: "4em"
+      fontSize: "4.5em"
     },
     h2:{
-        fontSize:"3em"
+        fontSize:"4em",
+        color: "#F025F5"  
     },
     h3:{
-        fontSize:"2em"
+        fontSize:"3.5em",
+        color: "#F025F5"
     },
     body1:{
         fontSize:"1.5em"
