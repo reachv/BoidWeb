@@ -9,11 +9,11 @@ export function sidebar(){
     return (
         <>
             <Typography>
-                <Typography variant="subtitle1">Written by</Typography>
-                <Typography variant="body2">Reach Vann</Typography>
-                <Typography variant="subtitle1">Published</Typography>
-                <Typography variant="body2">2025.07.21</Typography>
-                <Typography variant="subtitle1">Contact me on</Typography>  
+                <Typography style={{fontSize:"0.7em"}}>Written by</Typography>
+                <Typography >Reach Vann</Typography>
+                <Typography style={{fontSize:"0.7em"}}>Published</Typography>
+                <Typography >2025.07.21</Typography>
+                <Typography style={{fontSize:"0.7em"}}>Contact me on</Typography>  
                 <Row>
                     <Col md={'auto'} style={{paddingTop:"0.5em"}}>
                         <Nav >

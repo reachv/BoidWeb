@@ -72,31 +72,6 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
             camera.setPosition(...CONFIG.CAMERA_LOCATION)
             camera.lookAt(0,0,0)
             
-            // Draw plane frame centered at camera with 2x width
-            p5.push();
-            p5.noFill();
-            p5.stroke(255, 255, 255, 150);
-            p5.strokeWeight(3);
-            const planeSize = p5.width * 2;
-            const halfSize = planeSize / 2;
-            // Position plane between camera and origin, facing camera
-            const camX = CONFIG.CAMERA_LOCATION[0];
-            const camY = CONFIG.CAMERA_LOCATION[1];
-            const camZ = CONFIG.CAMERA_LOCATION[2];
-            // Place plane at 1/3 distance from origin to camera
-            p5.translate(camX * 0.3, camY * 0.3, camZ * 0.3);
-            // Rotate plane to face camera
-            p5.rotateY(Math.atan2(camX, camZ));
-            p5.rotateX(-Math.atan2(camY, Math.sqrt(camX * camX + camZ * camZ)));
-            // Draw rectangle frame manually
-            p5.beginShape();
-            p5.vertex(-halfSize, -halfSize, 0);
-            p5.vertex(halfSize, -halfSize, 0);
-            p5.vertex(halfSize, halfSize, 0);
-            p5.vertex(-halfSize, halfSize, 0);
-            p5.vertex(-halfSize, -halfSize, 0);
-            p5.endShape();
-            p5.pop();
             // Rebuild octree every 2 frames
             if (frameCounter % CONFIG.OCTREE_REBUILD_INTERVAL === 0) {
                 octree.rebuild(flock);

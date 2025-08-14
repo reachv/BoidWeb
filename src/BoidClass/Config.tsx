@@ -20,8 +20,8 @@ export const CONFIG = {
         MAX_SPEED: 12,
         MAX_FORCE: 3.5,
         INITIAL_SPEED: 9,
-        VISUAL_RANGE_FACTOR: 0.4,
-        TURNING_FORCE: 0.35,
+        VISUAL_RANGE_FACTOR: 0.5,
+        TURNING_FORCE: 0.2,
         
         // Smoothing parameters
         ACCELERATION_DAMPING: 0.3,
@@ -30,7 +30,7 @@ export const CONFIG = {
         BOUNDARY_SOFTNESS: 50,
         
         // Distance thresholds (squared for performance)
-        SEPARATION_DISTANCE_SQ: 900,
+        SEPARATION_DISTANCE_SQ: 1200,
         COHESION_DISTANCE_SQ: 4900,
         ALIGNMENT_DISTANCE_SQ: 3600,
         NEIGHBOR_RADIUS: 100,
@@ -38,12 +38,12 @@ export const CONFIG = {
         // Force multipliers (gentle for natural movement)
         ALIGNMENT_FORCE: 0.3,
         COHESION_FORCE: 0.25,
-        SEPARATION_FORCE: 0.8,
+        SEPARATION_FORCE: 0.9,
     },
     
     // Visual settings
     VISUAL: {
-        BACKGROUND: [100, 3, 14] as const,
+        BACKGROUND: [100, 156, 185] as const,
         BOID_COLOR: [77, 255, 243] as const,
         BOUNDARY_COLOR: [255, 255, 255] as const,
         BOUNDARY_WEIGHT: 5,

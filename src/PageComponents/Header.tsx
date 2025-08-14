@@ -25,7 +25,7 @@ export function Header(){
                                         <div style={{position: "absolute", top: 0, left: 0, zIndex: 0}}>
                                             <ReactP5Wrapper sketch={canvas(width)} size={width} />
                                         </div>
-                                        <div style={{position: "relative", zIndex: 1}}>
+                                        <div style={{position: "relative", zIndex: 1, top: 2}}>
                                             <ReactP5Wrapper sketch={mySketch(width, 1500)} size={width} />
                                         </div>
                                     </>
