@@ -29,7 +29,7 @@ export class Boid{
 
     constructor(p5: P5CanvasInstance<MySketchProps>) {
         this.p5 = p5
-        this.position = VectorUtils.createRandom3DVector(p5, p5.width, p5.height, p5.width);
+        this.position = VectorUtils.createRandom3DVector(p5, CONFIG.BOID.VISUAL_RANGE_FACTOR * p5.width, CONFIG.BOID.VISUAL_RANGE_FACTOR * p5.height, CONFIG.BOID.VISUAL_RANGE_FACTOR * p5.width);
         
         this.velocity = VectorUtils.createRandomVector(p5, -CONFIG.BOID.MAX_SPEED, CONFIG.BOID.MAX_SPEED);
         this.velocity.setMag(CONFIG.BOID.INITIAL_SPEED);

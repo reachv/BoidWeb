@@ -12,7 +12,7 @@ export class Octree{
 
     root: OctreeNode;
 
-    constructor(center: Vector, size: number, maxCapacity = CONFIG.OCTREE_MAX_CAPACITY) {
+    constructor(center: Vector, size: Vector, maxCapacity = CONFIG.OCTREE_MAX_CAPACITY) {
         const boundary = new BoundingBox(center, size);
         this.root = new OctreeNode(boundary, maxCapacity);
     }

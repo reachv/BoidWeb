@@ -14,7 +14,7 @@ export const theme = createTheme({
         color: "#F025F5"
     },
     body1:{
-        fontSize:"1.5em"
+        fontSize:"1.25em"
     },
     body2:{
         fontSize:"1em"

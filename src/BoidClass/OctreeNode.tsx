@@ -76,12 +76,12 @@ export class OctreeNode{
 
     private subdivide(): void {
         const { center, size } = this.boundary;
-        const newSize = size * 0.5;
-        const offset = newSize;
+        const newSize = size.copy();
+        newSize.mult(0.5);
 
         this.children = OctreeNode.CHILD_OFFSETS.map(([ox, oy, oz]) => {
             const childCenter = center.copy();
-            childCenter.add(ox * offset, oy * offset, oz * offset);
+            childCenter.add(ox * newSize.x, oy * newSize.y, oz * newSize.z);
             return new OctreeNode(
                 new BoundingBox(childCenter, newSize),
                 this.maxCapacity,

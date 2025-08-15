@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image, Container } from "react-bootstrap";
 import AlignmentGif from '/alignment.gif'
 import CohesionGif from '/cohesion.gif'
 import SeparationGif from '/separation.gif'
@@ -11,63 +11,67 @@ import { useElementWidth } from "../Handlers/SketchResizeHandlers";
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import { TwoDBoid } from "../boids/2dboid";
 import { sidebar } from "./SideBar";
+import { PAGE_CONFIG } from "./PageConfig";
 
 export function Flocking(display: Boolean = false){
     const {elementRef, width, show} = useElementWidth()
     return(
         <>
-            <Row style={{paddingTop:"4em", paddingBottom:"4em"}}>
-                <Col xs={4} className="align-self-center">
-                    {display && sidebar()}
-                </Col>
-                <Col xs={8} className="justify-content-end">
-                    <Row><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[0]}</Typography></Row>
-                    <Row style={{paddingTop:"1em"}}><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[1]}</Typography></Row>
-                </Col>
-            </Row>
-            <Row style={{alignItems:"stretch", fontSize:"1em"}}>
-                <Col>
-                    <Row style={{paddingTop:"0.5em"}}>
-                        <Col><Image fluid src={SeparationGif}></Image></Col>
-                        <Col><Image fluid src={AlignmentGif}></Image></Col>
-                        <Col><Image fluid src={CohesionGif}></Image></Col>
-                    </Row>
-                    <Row style={{minHeight: "100px", alignItems: "flex-start", paddingTop:"1em"}}>
+            <Container fluid style={{paddingTop:PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
+                <Row>
+                    <Col xs={4} className="align-self-center">
+                        {display && sidebar()}
+                    </Col>
+                    <Col xs={8} className="justify-content-end">
+                        <Row><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[0]}</Typography></Row>
+                        <Row style={{paddingTop:"1em"}}><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[1]}</Typography></Row>
+                    </Col>
+                </Row>
+                <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM, alignItems:"stretch"}}>
+                    <Col>
+                        <Row>
+                            <Col><Image fluid src={SeparationGif}></Image></Col>
+                            <Col><Image fluid src={AlignmentGif}></Image></Col>
+                            <Col><Image fluid src={CohesionGif}></Image></Col>
+                        </Row>
+                        <Row style={{minHeight: "100px", alignItems: "flex-start", paddingTop:"1em"}}>
+                            <Col><Typography variant="body2">
+                                <strong>{TEXT_CONFIG.FLOCKING.SEPARATION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.SEPARATION.CONTEXT} 
+                            </Typography></Col>
                         <Col><Typography variant="body2">
-                            <strong>{TEXT_CONFIG.FLOCKING.SEPARATION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.SEPARATION.CONTEXT} 
-                        </Typography></Col>
-                       <Col><Typography variant="body2">
-                            <strong>{TEXT_CONFIG.FLOCKING.ALIGNMENT.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.ALIGNMENT.CONTEXT} 
-                        </Typography></Col>
-                        <Col><Typography variant="body2">
-                            <strong>{TEXT_CONFIG.FLOCKING.COHESION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.COHESION.CONTEXT} 
-                        </Typography></Col>
-                    </Row>
-                </Col>
-            </Row>
-            <Row style={{paddingTop:"2em", paddingBottom:"4em"}}>
-                <Col xs={4}/>
-                <Col xs={8} className="justify-content-end">
-                    <Row><Typography variant="h2" style={{paddingTop:"1em", paddingBottom:"1em"}}>Writing The Three Rules</Typography></Row>
-                    <Row><Typography variant="body1">{TEXT_CONFIG.FLOCKING.CODING_TEXT[0]}</Typography></Row>
-                    <Row><Typography variant="body1" style={{paddingTop:"1em"}}>{TEXT_CONFIG.FLOCKING.CODING_TEXT[1]}</Typography></Row>
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={6}><SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[0]}</SyntaxHighlighter></Col>
-                <Col xs={6}>
-                    <SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[1]}</SyntaxHighlighter>
-                </Col>
-            </Row>
-            <Row style={{paddingTop:"2em", paddingBottom:"2em"}}>
-                <Col xs={4}/>
-                <Col xs={8} className="justify-content-end">
-                    <Row><Typography variant="body1">{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[0]}</Typography></Row>
-                    <Row ref={elementRef}><Col style={{textAlign:"center", paddingTop:"4em"}}>{show && <ReactP5Wrapper sketch={TwoDBoid(width)} size={width}/>}</Col></Row>
-                    <Row><Typography variant="body1">{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[1]}</Typography></Row>
-                </Col>
-            </Row>
-            
+                                <strong>{TEXT_CONFIG.FLOCKING.ALIGNMENT.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.ALIGNMENT.CONTEXT} 
+                            </Typography></Col>
+                            <Col><Typography variant="body2">
+                                <strong>{TEXT_CONFIG.FLOCKING.COHESION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.COHESION.CONTEXT} 
+                            </Typography></Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+            <Container fluid style={{paddingTop: PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
+                <Row>
+                    <Col xs={4}/>
+                    <Col xs={8} className="justify-content-end">
+                        <Row><Typography variant="h2">Writing The Three Rules</Typography></Row>
+                        <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.CODING_TEXT[0]}</Typography></Row>
+                        <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.CODING_TEXT[1]}</Typography></Row>
+                    </Col>
+                </Row>
+                <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom:PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
+                    <Col xs={6}><SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[0]}</SyntaxHighlighter></Col>
+                    <Col xs={6}>
+                        <SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[1]}</SyntaxHighlighter>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={4}/>
+                    <Col xs={8} className="justify-content-end">
+                        <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[0]}</Typography></Row>
+                        <Row ref={elementRef}><Col style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM, textAlign: "center"}}>{show && <ReactP5Wrapper sketch={TwoDBoid(width)} size={width}/>}</Col></Row>
+                        <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[1]}</Typography></Row>
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }

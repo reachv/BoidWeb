@@ -11,6 +11,17 @@ export const PAGE_CONFIG = {
         GRADIENT_START: "rgba(100, 255, 218, 0.1)",
         GRADIENT_END: "rgba(17, 34, 64, 0.1)"
     },
-    PRIMARY_COLOR: "#0A192F",
-    SECONDARY_COLOR: "#F76C6C",
+
+    PADDING:{
+        CONTAINER_PADDING: {
+            TOP_PADDING: "4em",
+            RIGHT_PADDING: "2em"            
+        },
+        PARAGRAPH_PADDING:"1em",
+        IMAGE_PADDING:{
+            TOP: "3em",
+            BOTTOM: "2em"
+        },
+
+    }
 }

@@ -11,19 +11,16 @@ interface Bounds {
 
 export class BoundingBox{
     readonly center: Vector;
-    readonly size: number;
+    readonly size: Vector;
     readonly bounds: Bounds;
 
-    constructor(center: Vector, size: number) {
+    constructor(center: Vector, size: Vector) {
         this.center = center.copy();
-        this.size = size;
-        
-        const sizeVector = center.copy();
-        sizeVector.set(size, size, size);
+        this.size = size.copy();
         
         this.bounds = {
-            min: p5.Vector.sub(center, sizeVector),
-            max: p5.Vector.add(center, sizeVector)
+            min: p5.Vector.sub(center, size),
+            max: p5.Vector.add(center, size)
         };
     }
 
@@ -45,7 +42,7 @@ export class BoundingBox{
     draw(p5: P5CanvasInstance<MySketchProps>): void {
         p5.push();
         p5.translate(this.center.x, this.center.y, this.center.z);
-        p5.box(this.size * 2);
+        p5.box(this.size.x * 2, this.size.y * 2, this.size.z * 2);
         p5.pop();
     }
 }

@@ -36,7 +36,7 @@ function renderBoidsBatch(p5: P5CanvasInstance<MySketchProps>, boids: Boid[]): v
         const opacity = (1 - normalizedDistance) * 255;
 
         // Set stroke with calculated opacity
-        p5.stroke(CONFIG.VISUAL.BOID_COLOR[0], CONFIG.VISUAL.BOID_COLOR[1], CONFIG.VISUAL.BOID_COLOR[2], opacity < 25 ? 25 : opacity);
+        p5.stroke(CONFIG.VISUAL.BOID_COLOR[0], CONFIG.VISUAL.BOID_COLOR[1], CONFIG.VISUAL.BOID_COLOR[2], opacity < 50 ? 50 : opacity);
         p5.point(x, y, z);
     }
 
@@ -49,13 +49,17 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
     const sketch = (p5: P5CanvasInstance<MySketchProps>) =>{
         let flock: Boid[] = [];
         let draw = false;
-        let octree: Octree = new Octree(p5.createVector(0, 0, 0), INITIAL_SIZE);
+        let octree: Octree
         let frameCounter = 0;
         let camera: Camera
         p5.setup = () => {
             if(INITIAL_SIZE > 750){
-                p5.createCanvas(750, 750, p5.WEBGL);
+                p5.createCanvas(INITIAL_SIZE, 750, p5.WEBGL);
+                let sizeVector = p5.createVector(INITIAL_SIZE, 750, INITIAL_SIZE) 
+                octree = new Octree(p5.createVector(0, 0, 0), sizeVector)
             }else{
+                let sizeVector = p5.createVector(INITIAL_SIZE, INITIAL_SIZE, INITIAL_SIZE) 
+                octree = new Octree(p5.createVector(0, 0, 0), sizeVector)
                 p5.createCanvas(INITIAL_SIZE, INITIAL_SIZE, p5.WEBGL);
             }
 
@@ -96,6 +100,30 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
             p5.noFill();
             p5.stroke(255);
             p5.strokeWeight(5);
+            
+            if(!draw){
+                // Draw screen frame at origin oriented towards camera
+                p5.push();
+                p5.translate(0, 0, 0);
+                
+                // Calculate rotation to face the camera
+                const [camX, camY, camZ] = CONFIG.CAMERA_LOCATION;
+                const toCamera = p5.createVector(camX, camY, camZ);
+                toCamera.normalize();
+                
+                // Calculate rotation angles
+                const angleY = Math.atan2(toCamera.x, toCamera.z);
+                const angleX = Math.atan2(-toCamera.y, Math.sqrt(toCamera.x * toCamera.x + toCamera.z * toCamera.z));
+                
+                p5.rotateY(angleY);
+                p5.rotateX(angleX);
+                
+                p5.noFill();
+                p5.stroke(255, 0, 0); // Red for visibility
+                p5.strokeWeight(2);
+                p5.box(p5.width * 2.84, p5.height * 2.84, 100);
+                p5.pop();
+            }
         };
 
         p5.updateWithProps = (props) => {
@@ -103,11 +131,12 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
             
             if (props.size && props.size !== p5.width) {
                 if(props.size > 750){
-                    p5.resizeCanvas(750, 750)
+                    p5.resizeCanvas(props.size, 750)
+                    octree = new Octree(p5.createVector(0,0,0), p5.createVector(props.size, 750, props.size))
                 }else{
                     p5.resizeCanvas(props.size, props.size);
+                    octree = new Octree(p5.createVector(0,0,0), p5.createVector(props.size, props.size, props.size))
                 }
-                octree = new Octree(p5.createVector(0,0,0), props.size > 750 ? 750 : props.size);
                 frameCounter = 0;
             }
             
