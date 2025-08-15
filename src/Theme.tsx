@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   typography: {
     h1:{
-      fontSize: "4.5em"
+      fontSize: "2em"
     },
     h2:{
         fontSize:"4em",
