@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import { Row, Col, Image, Container } from "react-bootstrap";
-import AlignmentGif from '/alignment.gif'
-import CohesionGif from '/cohesion.gif'
-import SeparationGif from '/separation.gif'
+import AlignmentGif from '/FLOCKING_ALIGNMENT.gif'
+import CohesionGif from '/FLOCKING_COHESION.gif'
+import SeparationGif from '/FLOCKING_SEPARATION.gif'
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { FlockingCode } from "../CodeSnippets/FlockingSnippet";
