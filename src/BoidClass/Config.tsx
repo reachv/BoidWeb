@@ -2,7 +2,7 @@
 export const CONFIG = {
     
     // Camera Location
-    CAMERA_RATE: 1.547,
+    CAMERA_RATE: 750,
 
     //SETUP
     BOID_COUNT: 1500,

@@ -30,20 +30,30 @@ export function Flocking(showSideBar: number){
                 <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM, alignItems:"stretch"}}>
                     <Col>
                         <Row>
-                            <Col><Image fluid src={SeparationGif}></Image></Col>
-                            <Col><Image fluid src={AlignmentGif}></Image></Col>
-                            <Col><Image fluid src={CohesionGif}></Image></Col>
-                        </Row>
-                        <Row style={{minHeight: "100px", alignItems: "flex-start", paddingTop:"1em"}}>
-                            <Col><Typography variant="body2">
-                                <strong>{TEXT_CONFIG.FLOCKING.SEPARATION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.SEPARATION.CONTEXT} 
-                            </Typography></Col>
-                        <Col><Typography variant="body2">
-                                <strong>{TEXT_CONFIG.FLOCKING.ALIGNMENT.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.ALIGNMENT.CONTEXT} 
-                            </Typography></Col>
-                            <Col><Typography variant="body2">
-                                <strong>{TEXT_CONFIG.FLOCKING.COHESION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.COHESION.CONTEXT} 
-                            </Typography></Col>
+                            <Col xs={12} md={4}>
+                                <Row><Image fluid src={SeparationGif}></Image></Row>
+                                <Row>
+                                    <Typography variant="body2" style={{paddingTop:PAGE_CONFIG.PADDING.SUBTEXT_PADDING, paddingBottom:PAGE_CONFIG.PADDING.SUBTEXT_PADDING}}>
+                                        <strong>{TEXT_CONFIG.FLOCKING.SEPARATION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.SEPARATION.CONTEXT}
+                                </Typography>
+                                </Row>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <Row><Image fluid src={AlignmentGif}></Image></Row>
+                                <Row>
+                                    <Typography variant="body2" style={{paddingTop:PAGE_CONFIG.PADDING.SUBTEXT_PADDING, paddingBottom:PAGE_CONFIG.PADDING.SUBTEXT_PADDING}}>
+                                        <strong>{TEXT_CONFIG.FLOCKING.ALIGNMENT.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.ALIGNMENT.CONTEXT}
+                                    </Typography>
+                                </Row>
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <Row><Image fluid src={CohesionGif}></Image></Row>
+                                <Row>
+                                    <Typography variant="body2" style={{paddingTop:PAGE_CONFIG.PADDING.SUBTEXT_PADDING, paddingBottom:PAGE_CONFIG.PADDING.SUBTEXT_PADDING}}>
+                                        <strong>{TEXT_CONFIG.FLOCKING.COHESION.TITLE}</strong>: {TEXT_CONFIG.FLOCKING.COHESION.CONTEXT}
+                                    </Typography>
+                                </Row>
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
@@ -58,8 +68,8 @@ export function Flocking(showSideBar: number){
                     </Col>
                 </Row>
                 <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom:PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
-                    <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[0]}</SyntaxHighlighter></Col>
-                    <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[1]}</SyntaxHighlighter></Col>
+                    <Col xs={12} lg={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[0]}</SyntaxHighlighter></Col>
+                    <Col xs={12} lg={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[1]}</SyntaxHighlighter></Col>
                 </Row>
                 <Row>
                     <Col xl={4}/>

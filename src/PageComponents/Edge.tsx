@@ -20,10 +20,10 @@ export function Edge(){
             </Col>
           </Row>
           <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
               <SyntaxHighlighter language="typescript" style={gruvboxDark}>{EdgeCode[1]}</SyntaxHighlighter>
             </Col>
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
               <SyntaxHighlighter language="typescript" style={gruvboxDark}>{EdgeCode[0]}</SyntaxHighlighter>
             </Col>
           </Row>

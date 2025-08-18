@@ -28,8 +28,8 @@ export function Octree(){
             </Col>
           </Row>
           <Row className='justify-content-center' style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
-            <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[0]}</SyntaxHighlighter></Col>
-            <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[1]}</SyntaxHighlighter></Col>
+            <Col xs={12} lg={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[0]}</SyntaxHighlighter></Col>
+            <Col xs={12} lg={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[1]}</SyntaxHighlighter></Col>
           </Row>
           <Row>
             <Col xl={4}/>

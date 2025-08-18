@@ -15,13 +15,15 @@ export const PAGE_CONFIG = {
     PADDING:{
         CONTAINER_PADDING: {
             TOP_PADDING: "4em",
-            RIGHT_PADDING: "2em"            
+            RIGHT_PADDING: "1em"            
         },
         PARAGRAPH_PADDING:"2em",
         IMAGE_PADDING:{
             TOP: "3em",
             BOTTOM: "2em"
         },
+
+        SUBTEXT_PADDING:"1em",
 
     }
 }

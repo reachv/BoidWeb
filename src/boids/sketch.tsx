@@ -13,7 +13,7 @@ function renderBoidsBatch(p5: P5CanvasInstance<MySketchProps>, boids: Boid[]): v
     p5.strokeWeight(CONFIG.VISUAL.BOID_WEIGHT);
     
     // Get camera position
-    const [camX, camY, camZ] = [0, 0, CONFIG.CAMERA_RATE * p5.width];
+    const [camX, camY, camZ] = [0, 0, CONFIG.CAMERA_RATE + p5.width];
     
     // Calculate max distance from camera to furthest possible corner of bounding box
     const boxSize = p5.width;
@@ -87,7 +87,7 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
             p5.background(...CONFIG.VISUAL.BACKGROUND);
             p5.orbitControl();
 
-            camera.setPosition(0, 0, p5.width * CONFIG.CAMERA_RATE);
+            camera.setPosition(0, 0, p5.width + CONFIG.CAMERA_RATE);
             
             // Rebuild octree every 2 frames
             if (frameCounter % CONFIG.OCTREE_REBUILD_INTERVAL === 0) {
