@@ -88,6 +88,7 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
             p5.orbitControl();
 
             camera.setPosition(0, 0, p5.width + CONFIG.CAMERA_RATE);
+            camera.lookAt(0, 0, 0);
             
             // Rebuild octree every 2 frames
             if (frameCounter % CONFIG.OCTREE_REBUILD_INTERVAL === 0) {
