@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Col, Container, Image, Row } from "react-bootstrap";
-import OctreeGIF from "/OctreeGIF.gif"
+import OctreeGIF from "/OCTREE_DEMO.gif"
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import { mySketch } from "../boids/sketch";
 import { useElementWidth } from "../Handlers/SketchResizeHandlers";
