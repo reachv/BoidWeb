@@ -11,8 +11,8 @@ export function Edge(){
         <>
         <Container fluid style={{paddingTop: PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
           <Row>
-            <Col xs={4}/>
-            <Col xs={8}>
+            <Col xl={4}/>
+            <Col xs={12} xl={8}>
               <Row><Typography variant="h2">{TEXT_CONFIG.EDGE_CONTENT.TITLE}</Typography></Row>
               <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.EDGE_CONTENT.BODY[0]}</Typography></Row>
               <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.EDGE_CONTENT.BODY[1]}</Typography></Row>
@@ -28,8 +28,8 @@ export function Edge(){
             </Col>
           </Row>
           <Row>
-            <Col xs={4}/>
-            <Col xs={8}>
+            <Col xl={4}/>
+            <Col xs={12} xl={8}>
               <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.EDGE_CONTENT.TRANSITION[0]}</Typography></Row>
               <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.EDGE_CONTENT.TRANSITION[1]}</Typography></Row>
             </Col>

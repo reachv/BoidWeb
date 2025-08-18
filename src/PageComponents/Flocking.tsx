@@ -13,16 +13,16 @@ import { TwoDBoid } from "../boids/2dboid";
 import { sidebar } from "./SideBar";
 import { PAGE_CONFIG } from "./PageConfig";
 
-export function Flocking(display: Boolean = false){
+export function Flocking(showSideBar: number){
     const {elementRef, width, show} = useElementWidth()
+
     return(
         <>
             <Container fluid style={{paddingTop:PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
                 <Row>
-                    <Col xs={4} className="align-self-center">
-                        {display && sidebar()}
-                    </Col>
-                    <Col xs={8} className="justify-content-end">
+                    {(showSideBar < 1200 && showSideBar > 992) && <Col lg={4} className="align-self-center">{sidebar()}</Col>}
+                    {(showSideBar <= 992) && <Row style={{paddingBottom:"2em"}}>{sidebar()}</Row>}
+                    <Col xs={12} lg={8} className="justify-content-end">
                         <Row><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[0]}</Typography></Row>
                         <Row style={{paddingTop:"1em"}}><Typography variant="body1">{TEXT_CONFIG.INSPIRATIONS[1]}</Typography></Row>
                     </Col>
@@ -50,8 +50,8 @@ export function Flocking(display: Boolean = false){
             </Container>
             <Container fluid style={{paddingTop: PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
                 <Row>
-                    <Col xs={4}/>
-                    <Col xs={8} className="justify-content-end">
+                    <Col xl={4}/>
+                    <Col xs={12} xl={8} className="justify-content-end">
                         <Row><Typography variant="h2">Writing The Three Rules</Typography></Row>
                         <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.CODING_TEXT[0]}</Typography></Row>
                         <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.CODING_TEXT[1]}</Typography></Row>
@@ -62,8 +62,8 @@ export function Flocking(display: Boolean = false){
                     <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[1]}</SyntaxHighlighter></Col>
                 </Row>
                 <Row>
-                    <Col xs={4}/>
-                    <Col xs={8} className="justify-content-end">
+                    <Col xl={4}/>
+                    <Col xs={12} xl={8} className="justify-content-end">
                         <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[0]}</Typography></Row>
                         <Row ref={elementRef}><Col style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM, textAlign: "center"}}>{show && <ReactP5Wrapper sketch={TwoDBoid(width)} size={width}/>}</Col></Row>
                         <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.FLOCKING.TWO_D_TRANSITION[1]}</Typography></Row>

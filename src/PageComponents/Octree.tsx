@@ -16,8 +16,8 @@ export function Octree(){
       <>
         <Container fluid style={{paddingRight:PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
           <Row>
-            <Col xs={4}/>
-            <Col xs={8}>
+            <Col xl={4}/>
+            <Col xs={12} xl={8}>
               <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP}}>
                 <Row className='justify-content-center'>
                   <Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/>
@@ -32,8 +32,8 @@ export function Octree(){
             <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[1]}</SyntaxHighlighter></Col>
           </Row>
           <Row>
-            <Col xs={4}/>
-            <Col xs={8}>
+            <Col xl={4}/>
+            <Col xs={12} xl={8}>
               <Row><Typography variant="body1">{TEXT_CONFIG.OCTREE_CONTENT.OPTIMIZATION}</Typography></Row>
               <Row style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}><Typography variant="body1">That being said, here's it working in real-time.</Typography></Row>
               <Row className='justify-content-center'>

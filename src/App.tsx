@@ -14,31 +14,31 @@ import { useState, useEffect } from 'react'
 function App() {
   const {elementRef, width} = useElementWidth()
   const [showSidebar, setShowSidebar] = useState(false)
-  
   useEffect(() => {
     setShowSidebar(width > 1200)
   }, [width])
+
   let newTheme = responsiveFontSizes(theme)
   return (
     <ThemeProvider theme={newTheme}>
       <Row style={{padding:"2em"}}><Typography variant='h1'>Reach Vann</Typography></Row>
       <div style={{padding:"2em"}}>
         <Row ref={elementRef} >
-          <Col xs={2}>
+          <Col xl={2}>
             {showSidebar && (
               <Row style={{position:"fixed", top:"40vh"}}>
                 {sidebar()}
               </Row>
             )}
           </Col>
-          <Col xs={10}>
+          <Col xs={12} xl={10}>
             <Container fluid className='rounded justify-content-center' style={{
               background: PAGE_CONFIG.COLOR_PALETTE.CONTAINER_COLOR,
             }}>
               {/* HEADER */}
               {Header()}
               {/* FLOCKING */}
-              {Flocking(!showSidebar)}
+              {Flocking(width)}
               {/* EDGE */}
               {Edge()}
               {/* OCTREE */}
