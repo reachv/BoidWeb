@@ -12,31 +12,45 @@ function renderBoidsBatch(p5: P5CanvasInstance<MySketchProps>, boids: Boid[]): v
     // Set rendering properties once for all boids
     p5.strokeWeight(CONFIG.VISUAL.BOID_WEIGHT);
     
-    // Calculate max distance from camera to furthest corner of bounding box
-    const halfSize = p5.width / 2;
-    const FAR_CORNER = [-halfSize, halfSize, -halfSize];
-    const CLOSE_CORNER = [halfSize, -halfSize, halfSize]
-
-
-    const dx = CLOSE_CORNER[0] - FAR_CORNER[0];
-    const dy = CLOSE_CORNER[1] - FAR_CORNER[1];
-    const dz = CLOSE_CORNER[2] - FAR_CORNER[2];
-    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
+    // Get camera position
+    const [camX, camY, camZ] = [0, 0, CONFIG.CAMERA_RATE * p5.width];
     
+    // Calculate max distance from camera to furthest possible corner of bounding box
+    const boxSize = p5.width;
+    const corners = [
+        [-boxSize, -boxSize, -boxSize],
+        [-boxSize, -boxSize, boxSize],
+        [-boxSize, boxSize, -boxSize],
+        [-boxSize, boxSize, boxSize],
+        [boxSize, -boxSize, -boxSize],
+        [boxSize, -boxSize, boxSize],
+        [boxSize, boxSize, -boxSize],
+        [boxSize, boxSize, boxSize]
+    ];
+    
+    let maxDistance = 0;
+    for (const corner of corners) {
+        const dx = corner[0] - camX;
+        const dy = corner[1] - camY;
+        const dz = corner[2] - camZ;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        maxDistance = Math.max(maxDistance, dist);
+    }
+
     // Render all boids in a single draw call setup
     for (const boid of boids) {
         const [x, y, z] = boid.getPositionData();
 
-        const dx = CLOSE_CORNER[0] - x;
-        const dy = CLOSE_CORNER[1] - y;
-        const dz = CLOSE_CORNER[2] - z;
+        // Calculate distance from camera position
+        const dx = x - camX;
+        const dy = y - camY;
+        const dz = z - camZ;
         const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        const normalizedDistance = Math.min(distance / dist, 1);
+        const normalizedDistance = Math.min(distance / maxDistance, 1);
         const opacity = (1 - normalizedDistance) * 255;
 
         // Set stroke with calculated opacity
-        p5.stroke(CONFIG.VISUAL.BOID_COLOR[0], CONFIG.VISUAL.BOID_COLOR[1], CONFIG.VISUAL.BOID_COLOR[2], opacity < 50 ? 50 : opacity);
+        p5.stroke(CONFIG.VISUAL.BOID_COLOR[0], CONFIG.VISUAL.BOID_COLOR[1], CONFIG.VISUAL.BOID_COLOR[2], opacity < 1 ? 1 : opacity);
         p5.point(x, y, z);
     }
 
@@ -62,7 +76,6 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
                 octree = new Octree(p5.createVector(0, 0, 0), sizeVector)
                 p5.createCanvas(INITIAL_SIZE, INITIAL_SIZE, p5.WEBGL);
             }
-
             camera = p5.createCamera()
             // Create boids
             for (let i = 0; i < FLOCK_SIZE; i++) {
@@ -73,8 +86,8 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
         p5.draw = () => {
             p5.background(...CONFIG.VISUAL.BACKGROUND);
             p5.orbitControl();
-            camera.setPosition(...CONFIG.CAMERA_LOCATION)
-            camera.lookAt(0,0,0)
+
+            camera.setPosition(0, 0, p5.width * CONFIG.CAMERA_RATE);
             
             // Rebuild octree every 2 frames
             if (frameCounter % CONFIG.OCTREE_REBUILD_INTERVAL === 0) {
@@ -98,32 +111,9 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
 
             // Draw bounding box
             p5.noFill();
-            p5.stroke(255);
+            p5.stroke(140);
             p5.strokeWeight(5);
-            
-            if(!draw){
-                // Draw screen frame at origin oriented towards camera
-                p5.push();
-                p5.translate(0, 0, 0);
-                
-                // Calculate rotation to face the camera
-                const [camX, camY, camZ] = CONFIG.CAMERA_LOCATION;
-                const toCamera = p5.createVector(camX, camY, camZ);
-                toCamera.normalize();
-                
-                // Calculate rotation angles
-                const angleY = Math.atan2(toCamera.x, toCamera.z);
-                const angleX = Math.atan2(-toCamera.y, Math.sqrt(toCamera.x * toCamera.x + toCamera.z * toCamera.z));
-                
-                p5.rotateY(angleY);
-                p5.rotateX(angleX);
-                
-                p5.noFill();
-                p5.stroke(255, 0, 0); // Red for visibility
-                p5.strokeWeight(2);
-                p5.box(p5.width * 2.84, p5.height * 2.84, 100);
-                p5.pop();
-            }
+            p5.box(p5.width*1.5,p5.height*1.5, p5.width*1.5)
         };
 
         p5.updateWithProps = (props) => {
@@ -139,6 +129,7 @@ export function mySketch(INITIAL_SIZE: number, FLOCK_SIZE: number) {
                 }
                 frameCounter = 0;
             }
+
             
             if (props.draw !== undefined) {
                 draw = props.draw;

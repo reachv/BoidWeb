@@ -4,7 +4,7 @@ import AlignmentGif from '/alignment.gif'
 import CohesionGif from '/cohesion.gif'
 import SeparationGif from '/separation.gif'
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
-import { lucario } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { FlockingCode } from "../CodeSnippets/FlockingSnippet";
 import { TEXT_CONFIG } from "./TextConfigs";
 import { useElementWidth } from "../Handlers/SketchResizeHandlers";
@@ -58,10 +58,8 @@ export function Flocking(display: Boolean = false){
                     </Col>
                 </Row>
                 <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom:PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
-                    <Col xs={6}><SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[0]}</SyntaxHighlighter></Col>
-                    <Col xs={6}>
-                        <SyntaxHighlighter language="typescript" style={lucario}>{FlockingCode[1]}</SyntaxHighlighter>
-                    </Col>
+                    <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[0]}</SyntaxHighlighter></Col>
+                    <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{FlockingCode[1]}</SyntaxHighlighter></Col>
                 </Row>
                 <Row>
                     <Col xs={4}/>

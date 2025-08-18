@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { Col, Container, Row } from "react-bootstrap";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { lucario } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { EdgeCode } from "../CodeSnippets/EdgeSnippet";
 import { TEXT_CONFIG } from "./TextConfigs";
 import { PAGE_CONFIG } from "./PageConfig";
@@ -21,10 +21,10 @@ export function Edge(){
           </Row>
           <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
             <Col xs={6}>
-              <SyntaxHighlighter language="typescript" style={lucario}>{EdgeCode[1]}</SyntaxHighlighter>
+              <SyntaxHighlighter language="typescript" style={gruvboxDark}>{EdgeCode[1]}</SyntaxHighlighter>
             </Col>
             <Col xs={6}>
-              <SyntaxHighlighter language="typescript" style={lucario}>{EdgeCode[0]}</SyntaxHighlighter>
+              <SyntaxHighlighter language="typescript" style={gruvboxDark}>{EdgeCode[0]}</SyntaxHighlighter>
             </Col>
           </Row>
           <Row>

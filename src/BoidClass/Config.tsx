@@ -2,7 +2,7 @@
 export const CONFIG = {
     
     // Camera Location
-    CAMERA_LOCATION: [1600.73829884712, -564.3011674295059, 1600.6850185941225],
+    CAMERA_RATE: 1.547,
 
     //SETUP
     BOID_COUNT: 1500,
@@ -20,7 +20,7 @@ export const CONFIG = {
         MAX_SPEED: 12,
         MAX_FORCE: 3.5,
         INITIAL_SPEED: 9,
-        VISUAL_RANGE_FACTOR: 0.75,
+        VISUAL_RANGE_FACTOR: 0.6,
         TURNING_FORCE: 0.2,
         
         // Smoothing parameters
@@ -30,8 +30,8 @@ export const CONFIG = {
         BOUNDARY_SOFTNESS: 50,
         
         // Distance thresholds (squared for performance)
-        SEPARATION_DISTANCE_SQ: 1200,
-        COHESION_DISTANCE_SQ: 4900,
+        SEPARATION_DISTANCE_SQ: 900,
+        COHESION_DISTANCE_SQ: 4000,
         ALIGNMENT_DISTANCE_SQ: 3600,
         NEIGHBOR_RADIUS: 100,
         
@@ -43,8 +43,8 @@ export const CONFIG = {
     
     // Visual settings
     VISUAL: {
-        BACKGROUND: [100, 19, 37] as const,
-        BOID_COLOR: [172, 232, 148] as const,
+        BACKGROUND: [190, 190, 190] as const,
+        BOID_COLOR: [0, 0, 0] as const,
         BOUNDARY_COLOR: [255, 255, 255] as const,
         BOUNDARY_WEIGHT: 5,
         BOID_WEIGHT: 3,

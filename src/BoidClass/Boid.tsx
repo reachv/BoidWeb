@@ -63,41 +63,29 @@ export class Boid{
         if (pos.x > -this.p5.width + margin || pos.x < this.p5.width - margin ||
             pos.y > -this.p5.height + margin || pos.y < this.p5.height - margin ||
             pos.z > -this.p5.width + margin || pos.z < this.p5.width - margin) {
-            // X boundaries with soft force scaling
+            // X boundaries without soft force scaling
             const leftBoundary = -this.p5.width + this.visualRange.x;
             const rightBoundary = this.p5.width - this.visualRange.x;
             if (this.position.x < leftBoundary) {
-                const distance = leftBoundary - this.position.x;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.x = CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.x = CONFIG.BOID.TURNING_FORCE;
             } else if (this.position.x > rightBoundary) {
-                const distance = this.position.x - rightBoundary;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.x = -CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.x = -CONFIG.BOID.TURNING_FORCE;
             }
-            // Y boundaries with soft force scaling
+            // Y boundaries without soft force scaling
             const topBoundary = -this.p5.height + this.visualRange.y;
             const bottomBoundary = this.p5.height - this.visualRange.y;
             if (this.position.y < topBoundary) {
-                const distance = topBoundary - this.position.y;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.y = CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.y = CONFIG.BOID.TURNING_FORCE;
             } else if (this.position.y > bottomBoundary) {
-                const distance = this.position.y - bottomBoundary;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.y = -CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.y = -CONFIG.BOID.TURNING_FORCE;
             }
-            // Z boundaries with soft force scaling
+            // Z boundaries without soft force scaling
             const frontBoundary = -this.p5.width + this.visualRange.z;
             const backBoundary = this.p5.width - this.visualRange.z;
             if (this.position.z < frontBoundary) {
-                const distance = frontBoundary - this.position.z;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.z = CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.z = CONFIG.BOID.TURNING_FORCE;
             } else if (this.position.z > backBoundary) {
-                const distance = this.position.z - backBoundary;
-                const forceStrength = Math.min(1, distance / CONFIG.BOID.BOUNDARY_SOFTNESS);
-                this.tempVector1.z = -CONFIG.BOID.TURNING_FORCE * forceStrength;
+                this.tempVector1.z = -CONFIG.BOID.TURNING_FORCE;
             }
             this.velocity.add(this.tempVector1);
         }

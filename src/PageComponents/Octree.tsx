@@ -5,7 +5,7 @@ import { ReactP5Wrapper } from "@p5-wrapper/react";
 import { mySketch } from "../boids/sketch";
 import { useElementWidth } from "../Handlers/SketchResizeHandlers";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
-import { lucario } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { gruvboxDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { OCTREE_CODE } from "../CodeSnippets/OctreeSnippet";
 import { TEXT_CONFIG } from "./TextConfigs";
 import { PAGE_CONFIG } from "./PageConfig";
@@ -18,18 +18,18 @@ export function Octree(){
           <Row>
             <Col xs={4}/>
             <Col xs={8}>
-              <Row>
-                <Row className='justify-content-center' style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
+              <Row style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP}}>
+                <Row className='justify-content-center'>
                   <Image fluid style={{maxWidth:"750px", maxHeight:"750px"}} src={OctreeGIF}/>
                 </Row>
-                <Row><Typography variant="h2" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.OCTREE_CONTENT.TITLE}</Typography></Row>
+                <Row><Typography variant="h2" style={{paddingTop: "1em"}}>{TEXT_CONFIG.OCTREE_CONTENT.TITLE}</Typography></Row>
                 <Row><Typography variant="body1" style={{paddingTop: PAGE_CONFIG.PADDING.PARAGRAPH_PADDING}}>{TEXT_CONFIG.OCTREE_CONTENT.CONTENT}</Typography></Row>
               </Row>
             </Col>
           </Row>
           <Row className='justify-content-center' style={{paddingTop: PAGE_CONFIG.PADDING.IMAGE_PADDING.TOP, paddingBottom: PAGE_CONFIG.PADDING.IMAGE_PADDING.BOTTOM}}>
-            <Col xs={6}><SyntaxHighlighter language="typescript" style={lucario}>{OCTREE_CODE[0]}</SyntaxHighlighter></Col>
-            <Col xs={6}><SyntaxHighlighter language="typescript" style={lucario}>{OCTREE_CODE[1]}</SyntaxHighlighter></Col>
+            <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[0]}</SyntaxHighlighter></Col>
+            <Col xs={6}><SyntaxHighlighter language="typescript" style={gruvboxDark}>{OCTREE_CODE[1]}</SyntaxHighlighter></Col>
           </Row>
           <Row>
             <Col xs={4}/>

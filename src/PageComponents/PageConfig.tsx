@@ -17,7 +17,7 @@ export const PAGE_CONFIG = {
             TOP_PADDING: "4em",
             RIGHT_PADDING: "2em"            
         },
-        PARAGRAPH_PADDING:"1em",
+        PARAGRAPH_PADDING:"2em",
         IMAGE_PADDING:{
             TOP: "3em",
             BOTTOM: "2em"
