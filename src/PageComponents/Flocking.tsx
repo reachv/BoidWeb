@@ -20,6 +20,7 @@ export function Flocking(showSideBar: number){
         <>
             <Container fluid style={{paddingTop:PAGE_CONFIG.PADDING.CONTAINER_PADDING.TOP_PADDING, paddingRight: PAGE_CONFIG.PADDING.CONTAINER_PADDING.RIGHT_PADDING}}>
                 <Row>
+                    {(showSideBar > 1200) && <Col lg={4}/>}
                     {(showSideBar < 1200 && showSideBar > 992) && <Col lg={4} className="align-self-center">{sidebar()}</Col>}
                     {(showSideBar <= 992) && <Row style={{paddingBottom:"2em"}}>{sidebar()}</Row>}
                     <Col xs={12} lg={8} className="justify-content-end">

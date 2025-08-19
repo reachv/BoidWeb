@@ -2,6 +2,7 @@ import { Typography } from "@mui/material"
 import { Col, Image, Nav, Row } from "react-bootstrap"
 import LinkedInLogo from "/linkedin-logo.png"
 import GithubLogo from "/github.png"
+import { PAGE_CONFIG } from "./PageConfig"
 
 export function sidebar(){
 
@@ -11,11 +12,11 @@ export function sidebar(){
             <Typography>
                 <Row><Typography variant="sidebar1">Written by</Typography></Row>
                 <Row><Typography variant="sidebar2">Reach Vann</Typography></Row>
-                <Row><Typography variant="sidebar1">Published</Typography></Row>
+                <Row><Typography variant="sidebar1" style={{paddingTop:PAGE_CONFIG.PADDING.SUBTEXT_PADDING}}>Published</Typography></Row>
                 <Row><Typography variant="sidebar2">2025.07.21</Typography></Row>
-                <Row><Typography variant="sidebar1">Contact me on</Typography></Row>
+                <Row><Typography variant="sidebar1" style={{paddingTop:PAGE_CONFIG.PADDING.SUBTEXT_PADDING}}>Contact me on</Typography></Row>
                 <Row>
-                    <Col xs={'auto'} style={{paddingTop:"0.5em"}}>
+                    <Col xs={'auto'} >
                         <Nav >
                             <Nav.Item>
                                 <a href="https://www.linkedin.com/in/reach-vann-8b24691b0/">
@@ -24,7 +25,7 @@ export function sidebar(){
                             </Nav.Item>
                         </Nav>
                     </Col>
-                    <Col xs={'auto'} style={{paddingTop:"0.5em"}}>
+                    <Col xs={'auto'}>
                         <Nav >
                             <Nav.Item>
                                 <a href="https://github.com/reachv/">

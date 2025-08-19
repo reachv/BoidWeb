@@ -18,7 +18,8 @@ export const theme = createTheme({
     },
 
     body1:{
-        fontSize:"1.25em"
+        fontSize:"1.25em",
+        color: "#bebebeff"
     },
 
     body2:{
@@ -33,12 +34,12 @@ export const theme = createTheme({
 
     sidebar1: {
         fontSize:"0.75em",
-        color: "#d4d4d4ff"
+        color: "#999999ff"
     },
 
     sidebar2: {
         fontSize:"1em",
-        color: "#e7e7e7ff"
+        color: "#f0f0f0ff"
     },
     fontFamily: [
       'Roboto Condensed', // Your desired font

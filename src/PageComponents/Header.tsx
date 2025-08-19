@@ -11,7 +11,7 @@ export function Header(){
         <div>
             <Row>
                 <Typography variant="h2" style={{paddingBottom:"0.5em"}}>
-                        Replicating Birds in a 3d Space
+                        A Guide to Simulating Birds
                 </Typography>
                 <Col>
                     <Row className='justify-content-center'>

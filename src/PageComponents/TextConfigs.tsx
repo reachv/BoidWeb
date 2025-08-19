@@ -36,9 +36,8 @@ export const TEXT_CONFIG = {
         Afterwards, it was just a matter of implementing the above 3 behaviors and calculating the force they apply.`
         ],
 
-        TWO_D_TRANSITION: [`With a little bit of tweaking and a little bit of fine tuning, here's what the three rule should look like in conjunction with each other.`,
-        `
-        As you can probably tell, there's also another logic affecting the boids. 
+        TWO_D_TRANSITION: [`With a little bit of tweaking and a little bit of fine tuning, here's what the three rule should look like in conjunction with each other. As you can probably tell, there's also another logic affecting the boids.`,
+        ` 
         In typical simulations, boids are more or less teleported to the opposite side once they've moved out of the canvas.
         In our case, boids are naturally turning once they're within a certain distance from the edge of the canvas. So, how do we create natural turns?`]
     },
